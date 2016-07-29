@@ -83,15 +83,17 @@ public class ContactsService {
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void update(@PathParam("id") int id, Contact contact) {
+	public Response update(@PathParam("id") int id, Contact contact) {
 		contacts.set(id - 1, contact);
 		contact.setId(contacts.indexOf(contact) + 1);
+		return Response.ok().build();
 	}
 	
 	@DELETE
-	public void delete(@QueryParam("contactId") int id) {
+	public Response delete(@QueryParam("contactId") int id) {
 		Contact contact = contacts.get(id - 1);
 		contacts.remove(contact);
+		return Response.ok().build();
 	}
 
 }
