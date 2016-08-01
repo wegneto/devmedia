@@ -1,4 +1,4 @@
-package br.com.javamagazine.main;
+package br.com.javamagazine.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
