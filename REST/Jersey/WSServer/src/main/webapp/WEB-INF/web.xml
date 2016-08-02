@@ -3,5 +3,22 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+	
+	<display-name>WSServer</display-name>
+	
+	<servlet>
+		<servlet-name>WSServer</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>br.com.javamagazine.wsserver.ws.WSServer</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>WSServer</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
