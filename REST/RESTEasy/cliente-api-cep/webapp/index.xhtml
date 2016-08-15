@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+
+	<h:form>
+		CEP <br />
+		<h:inputText value="#{enderecoMBean.cep}" />
+
+		<h:commandButton action="#{enderecoMBean.buscarEnderecoPorCEP()}"
+			value="Buscar" />
+			
+		<hr/>
+		
+		<div>
+			<h:outputText value="#{enderecoMBean.endereco.logradouro}" /><br />
+			<h:outputText value="#{enderecoMBean.endereco.bairro}" /><br />
+			<h:outputText value="#{enderecoMBean.endereco.cidade}" /><br />
+			<h:outputText value="#{enderecoMBean.endereco.estado}" /><br />
+		
+		</div>
+	</h:form>
+
+</body>
+</html>
