@@ -6,6 +6,7 @@
 package br.com.devmedia.cursojee.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -29,8 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u")})
-public class Usuarios implements Serializable {
+    @NamedQuery(name = "Servicos.findAll", query = "SELECT s FROM Servicos s")})
+public class Servico implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,41 +44,28 @@ public class Usuarios implements Serializable {
     @Size(min = 1, max = 255)
     @Column(nullable = false, length = 255)
     private String nome;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
-    @Column(nullable = false, length = 255)
-    private String login;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 32)
-    @Column(nullable = false, length = 32)
-    private String senha;
-    @Basic(optional = false)
-    @NotNull
-    @Column(nullable = false)
-    private boolean administrador;
-    @Basic(optional = false)
-    @NotNull
-    @Column(nullable = false)
-    private boolean dentista;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDentista")
-    private List<Orcamento> orcamentoList;
+    @Column(nullable = false, precision = 16, scale = 2)
+    private BigDecimal custo;
+    @Size(max = 45)
+    @Column(length = 45)
+    private String servicoscol;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idServico")
+    private List<OrcamentoServico> orcamentoServicoList;
 
-    public Usuarios() {
+    public Servico() {
     }
 
-    public Usuarios(Integer id) {
+    public Servico(Integer id) {
         this.id = id;
     }
 
-    public Usuarios(Integer id, String nome, String login, String senha, boolean administrador, boolean dentista) {
+    public Servico(Integer id, String nome, BigDecimal custo) {
         this.id = id;
         this.nome = nome;
-        this.login = login;
-        this.senha = senha;
-        this.administrador = administrador;
-        this.dentista = dentista;
+        this.custo = custo;
     }
 
     public Integer getId() {
@@ -96,45 +84,29 @@ public class Usuarios implements Serializable {
         this.nome = nome;
     }
 
-    public String getLogin() {
-        return login;
+    public BigDecimal getCusto() {
+        return custo;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setCusto(BigDecimal custo) {
+        this.custo = custo;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getServicoscol() {
+        return servicoscol;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public boolean getAdministrador() {
-        return administrador;
-    }
-
-    public void setAdministrador(boolean administrador) {
-        this.administrador = administrador;
-    }
-
-    public boolean getDentista() {
-        return dentista;
-    }
-
-    public void setDentista(boolean dentista) {
-        this.dentista = dentista;
+    public void setServicoscol(String servicoscol) {
+        this.servicoscol = servicoscol;
     }
 
     @XmlTransient
-    public List<Orcamento> getOrcamentoList() {
-        return orcamentoList;
+    public List<OrcamentoServico> getOrcamentoServicoList() {
+        return orcamentoServicoList;
     }
 
-    public void setOrcamentoList(List<Orcamento> orcamentoList) {
-        this.orcamentoList = orcamentoList;
+    public void setOrcamentoServicoList(List<OrcamentoServico> orcamentoServicoList) {
+        this.orcamentoServicoList = orcamentoServicoList;
     }
 
     @Override
@@ -147,10 +119,10 @@ public class Usuarios implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuarios)) {
+        if (!(object instanceof Servico)) {
             return false;
         }
-        Usuarios other = (Usuarios) object;
+        Servico other = (Servico) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -159,7 +131,7 @@ public class Usuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.devmedia.cursojee.entities.Usuarios[ id=" + id + " ]";
+        return "br.com.devmedia.cursojee.entities.Servicos[ id=" + id + " ]";
     }
     
 }

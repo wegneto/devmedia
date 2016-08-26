@@ -75,7 +75,7 @@ public class Orcamento implements Serializable {
     private Cliente idCliente;
     @JoinColumn(name = "id_dentista", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Usuarios idDentista;
+    private Usuario idDentista;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrcamento")
     private List<OrcamentoServico> orcamentoServicoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrcamento")
@@ -162,11 +162,11 @@ public class Orcamento implements Serializable {
         this.idCliente = idCliente;
     }
 
-    public Usuarios getIdDentista() {
+    public Usuario getIdDentista() {
         return idDentista;
     }
 
-    public void setIdDentista(Usuarios idDentista) {
+    public void setIdDentista(Usuario idDentista) {
         this.idDentista = idDentista;
     }
 
