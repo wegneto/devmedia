@@ -6,7 +6,6 @@
 package br.com.devmedia.cursojee.service.repositories;
 
 import br.com.devmedia.cursojee.entities.Parcela;
-import br.com.devmedia.cursojee.entities.Servico;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -42,13 +41,35 @@ public class FinanceiroRepository extends BasicRepository {
     }
     
     public List<Parcela> getParcelasEmAberto(int idOrcamento) {
-        String query = "select p from Parcela p where p.idOrcamento.id = ?1 and p.pago = ?2";
+        String query = "select p from Parcela p where p.orcamento.id = ?1 and p.pago = ?2";
         return getList(Parcela.class, query, idOrcamento, Boolean.FALSE);
     }
     
     public List<Parcela> getParcelasPagas(int idOrcamento) {
-        String query = "select p from Parcela p where p.idOrcamento.id = ?1 and p.pago = ?2";
+        String query = "select p from Parcela p where p.orcamento.id = ?1 and p.pago = ?2";
         return getList(Parcela.class, query, idOrcamento, Boolean.TRUE);
+    }
+    
+    public List<Parcela> getParcelasByCustomer(int idCustomer) {
+        String query = "select p from Parcela p where p.orcamento.cliente.id = ?1";
+        return getList(Parcela.class, query, idCustomer);
+    }
+    
+    public List<Parcela> getParcelasEmAbertoByCustomer(int idCustomer) {
+        String query = "select p from Parcela p where p.orcamento.cliente.id = ?1 and p.pago = ?2";
+        return getList(Parcela.class, query, idCustomer, Boolean.FALSE);
+    }
+    
+    public List<Parcela> getParcelasPagasByCustomer(int idCustomer) {
+        String query = "select p from Parcela p where p.orcamento.cliente.id = ?1 and p.pago = ?2";
+        return getList(Parcela.class, query, idCustomer, Boolean.TRUE);
+    }
+    
+    public Parcela setPagamentoParcela(int ipParcela) {
+        Parcela p = getParcela(ipParcela);
+        p.setPago(true);
+        p = setParcela(p);
+        return p;
     }
     
 }

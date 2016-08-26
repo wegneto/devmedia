@@ -72,7 +72,7 @@ public class Orcamento implements Serializable {
     private Integer vezes;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Cliente idCliente;
+    private Cliente cliente;
     @JoinColumn(name = "id_dentista", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Usuario idDentista;
@@ -155,11 +155,11 @@ public class Orcamento implements Serializable {
     }
 
     public Cliente getIdCliente() {
-        return idCliente;
+        return cliente;
     }
 
     public void setIdCliente(Cliente idCliente) {
-        this.idCliente = idCliente;
+        this.cliente = idCliente;
     }
 
     public Usuario getIdDentista() {

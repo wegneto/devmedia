@@ -111,7 +111,7 @@ public class Cliente implements Serializable {
     @Column(name = "data_nascimento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Orcamento> orcamentoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
     private List<Anaminese> anamineseList;
