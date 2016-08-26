@@ -78,7 +78,7 @@ public class Orcamento implements Serializable {
     private Usuario idDentista;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrcamento")
     private List<OrcamentoServico> orcamentoServicoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrcamento")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
     private List<Parcela> parcelaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrcamento")
     private List<Anaminese> anamineseList;

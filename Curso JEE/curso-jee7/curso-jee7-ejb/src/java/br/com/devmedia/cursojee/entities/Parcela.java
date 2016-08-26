@@ -51,7 +51,7 @@ public class Parcela implements Serializable {
     private boolean pago;
     @JoinColumn(name = "id_orcamento", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Orcamento idOrcamento;
+    private Orcamento orcamento;
 
     public Parcela() {
     }
@@ -100,11 +100,11 @@ public class Parcela implements Serializable {
     }
 
     public Orcamento getIdOrcamento() {
-        return idOrcamento;
+        return orcamento;
     }
 
     public void setIdOrcamento(Orcamento idOrcamento) {
-        this.idOrcamento = idOrcamento;
+        this.orcamento = idOrcamento;
     }
 
     @Override

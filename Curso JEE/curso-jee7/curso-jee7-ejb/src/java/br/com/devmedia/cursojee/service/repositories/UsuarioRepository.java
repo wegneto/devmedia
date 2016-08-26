@@ -14,9 +14,9 @@ import javax.persistence.EntityManager;
  *
  * @author 43189334587
  */
-public class UserRepository extends BasicRepository {
+public class UsuarioRepository extends BasicRepository {
 
-    public UserRepository(EntityManager entityManager) {
+    public UsuarioRepository(EntityManager entityManager) {
         super(entityManager);
     }
     
@@ -46,18 +46,18 @@ public class UserRepository extends BasicRepository {
     }
 
     public Usuario getUsuarioByLoginPassword(String login, String password) {
-        String query = "select u from Usuarios u where u.login = ?1 and u.senha = ?2";
+        String query = "select u from Usuario u where u.login = ?1 and u.senha = ?2";
         Usuario usr = getPojo(Usuario.class, query, login, getMD5(password));
         return usr;
     }
     
     public List<Usuario> getUsers() {
-        String query = "select u from Usuarios u";
+        String query = "select u from Usuario u";
         return getList(Usuario.class, query);
     }
     
     public List<Usuario> getUsuariosByName(String nome) {
-        String query = "select u from Usuarios u where u.nome like ?1";
+        String query = "select u from Usuario u where u.nome like ?1";
         return getList(Usuario.class, query, nome+"%");
     }
 
