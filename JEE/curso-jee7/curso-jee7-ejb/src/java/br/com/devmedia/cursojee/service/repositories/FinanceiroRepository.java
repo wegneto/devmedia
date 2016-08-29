@@ -14,62 +14,62 @@ import javax.persistence.EntityManager;
  * @author 43189334587
  */
 public class FinanceiroRepository extends BasicRepository {
-    
+
     public FinanceiroRepository(EntityManager entityManager) {
         super(entityManager);
     }
-    
+
     public Parcela getParcela(int id) {
         return getEntity(Parcela.class, id);
     }
-    
+
     public Parcela setParcela(Parcela parcela) {
         return setEntity(parcela);
     }
-    
+
     public Parcela addParcela(Parcela parcela) {
         return addEntity(parcela);
     }
-    
+
     public void removeParcela(Parcela parcela) {
         removeEntity(parcela);
     }
-    
+
     public List<Parcela> getParcelasByOrcamento(int idOrcamento) {
         String query = "select p from Parcela p where p.idOrcamento.id = ?1";
         return getList(Parcela.class, query, idOrcamento);
     }
-    
+
     public List<Parcela> getParcelasEmAberto(int idOrcamento) {
         String query = "select p from Parcela p where p.orcamento.id = ?1 and p.pago = ?2";
         return getList(Parcela.class, query, idOrcamento, Boolean.FALSE);
     }
-    
+
     public List<Parcela> getParcelasPagas(int idOrcamento) {
         String query = "select p from Parcela p where p.orcamento.id = ?1 and p.pago = ?2";
         return getList(Parcela.class, query, idOrcamento, Boolean.TRUE);
     }
-    
-    public List<Parcela> getParcelasByCustomer(int idCustomer) {
+
+    public List<Parcela> getParcelasByCustomer(int idCliente) {
         String query = "select p from Parcela p where p.orcamento.cliente.id = ?1";
-        return getList(Parcela.class, query, idCustomer);
+        return getList(Parcela.class, query, idCliente);
     }
-    
-    public List<Parcela> getParcelasEmAbertoByCustomer(int idCustomer) {
+
+    public List<Parcela> getParcelasEmAbertoByCustomer(int idCliente) {
         String query = "select p from Parcela p where p.orcamento.cliente.id = ?1 and p.pago = ?2";
-        return getList(Parcela.class, query, idCustomer, Boolean.FALSE);
+        return getList(Parcela.class, query, idCliente, Boolean.FALSE);
     }
-    
-    public List<Parcela> getParcelasPagasByCustomer(int idCustomer) {
+
+    public List<Parcela> getParcelasPagasByCustomer(int idCliente) {
         String query = "select p from Parcela p where p.orcamento.cliente.id = ?1 and p.pago = ?2";
-        return getList(Parcela.class, query, idCustomer, Boolean.TRUE);
+        return getList(Parcela.class, query, idCliente, Boolean.TRUE);
     }
-    
+
     public Parcela setPagamentoParcela(int ipParcela) {
         Parcela p = getParcela(ipParcela);
         p.setPago(true);
         p = setParcela(p);
         return p;
     }
-    
+
 }
