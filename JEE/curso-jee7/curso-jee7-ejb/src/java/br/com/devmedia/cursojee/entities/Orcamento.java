@@ -8,6 +8,7 @@ package br.com.devmedia.cursojee.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -76,12 +77,12 @@ public class Orcamento implements Serializable {
     @JoinColumn(name = "id_dentista", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Usuario idDentista;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrcamento")
-    private List<OrcamentoServico> orcamentoServicoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
-    private List<Parcela> parcelaList;
+    private List<OrcamentoServico> orcamentoServicoList = new LinkedList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
+    private List<Parcela> parcelaList = new LinkedList<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrcamento")
-    private List<Anaminese> anamineseList;
+    private List<Anaminese> anamineseList = new LinkedList<>();
 
     public Orcamento() {
     }
@@ -221,5 +222,10 @@ public class Orcamento implements Serializable {
     public String toString() {
         return "br.com.devmedia.cursojee.entities.Orcamento[ id=" + id + " ]";
     }
-    
+
+    public void addServico(OrcamentoServico orcamentoServico) {
+        orcamentoServico.setOrcamento(this);
+        orcamentoServicoList.add(orcamentoServico);
+    }
+
 }

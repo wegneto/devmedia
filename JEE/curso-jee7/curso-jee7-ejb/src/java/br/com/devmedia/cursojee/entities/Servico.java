@@ -52,7 +52,7 @@ public class Servico implements Serializable {
     @Size(max = 45)
     @Column(length = 45)
     private String servicoscol;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idServico")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "servico")
     private List<OrcamentoServico> orcamentoServicoList;
 
     public Servico() {

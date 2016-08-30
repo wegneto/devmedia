@@ -51,10 +51,10 @@ public class OrcamentoServico implements Serializable {
     private String observacoes;
     @JoinColumn(name = "id_servico", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Servico idServico;
+    private Servico servico;
     @JoinColumn(name = "id_orcamento", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Orcamento idOrcamento;
+    private Orcamento orcamento;
 
     public OrcamentoServico() {
     }
@@ -92,20 +92,20 @@ public class OrcamentoServico implements Serializable {
         this.observacoes = observacoes;
     }
 
-    public Servico getIdServico() {
-        return idServico;
+    public Servico getServico() {
+        return servico;
     }
 
-    public void setIdServico(Servico idServico) {
-        this.idServico = idServico;
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 
-    public Orcamento getIdOrcamento() {
-        return idOrcamento;
+    public Orcamento getOrcamento() {
+        return orcamento;
     }
 
-    public void setIdOrcamento(Orcamento idOrcamento) {
-        this.idOrcamento = idOrcamento;
+    public void setOrcamento(Orcamento orcamento) {
+        this.orcamento = orcamento;
     }
 
     @Override
