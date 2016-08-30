@@ -61,7 +61,7 @@ public class Usuario implements Serializable {
     @NotNull
     @Column(nullable = false)
     private boolean dentista;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDentista")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dentista")
     private List<Orcamento> orcamentoList;
 
     public Usuario() {

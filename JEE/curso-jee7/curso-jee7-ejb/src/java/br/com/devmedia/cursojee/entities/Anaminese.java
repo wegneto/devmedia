@@ -79,10 +79,10 @@ public class Anaminese implements Serializable {
     private String observacoes;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Cliente idCliente;
+    private Cliente cliente;
     @JoinColumn(name = "id_orcamento", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Orcamento idOrcamento;
+    private Orcamento orcamento;
 
     public Anaminese() {
     }
@@ -197,20 +197,20 @@ public class Anaminese implements Serializable {
         this.observacoes = observacoes;
     }
 
-    public Cliente getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(Cliente idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public Orcamento getIdOrcamento() {
-        return idOrcamento;
+    public Orcamento getOrcamento() {
+        return orcamento;
     }
 
-    public void setIdOrcamento(Orcamento idOrcamento) {
-        this.idOrcamento = idOrcamento;
+    public void setOrcamento(Orcamento orcamento) {
+        this.orcamento = orcamento;
     }
 
     @Override

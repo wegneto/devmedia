@@ -14,6 +14,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -69,20 +71,21 @@ public class Orcamento implements Serializable {
     @NotNull
     @Size(min = 1, max = 9)
     @Column(name = "forma_pagamento", nullable = false, length = 9)
-    private String formaPagamento;
+    @Enumerated(EnumType.STRING)
+    private FormaPagamento formaPagamento;
     private Integer vezes;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Cliente cliente;
     @JoinColumn(name = "id_dentista", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Usuario idDentista;
+    private Usuario dentista;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
     private List<OrcamentoServico> orcamentoServicoList = new LinkedList<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
-    private List<Parcela> parcelaList = new LinkedList<>();
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrcamento")
-    private List<Anaminese> anamineseList = new LinkedList<>();
+    private List<Parcela> parcelas = new LinkedList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
+    private List<Anaminese> anamineses = new LinkedList<>();
 
     public Orcamento() {
     }
@@ -91,7 +94,7 @@ public class Orcamento implements Serializable {
         this.id = id;
     }
 
-    public Orcamento(Integer id, Date data, Date hora, BigDecimal total, String formaPagamento) {
+    public Orcamento(Integer id, Date data, Date hora, BigDecimal total, FormaPagamento formaPagamento) {
         this.id = id;
         this.data = data;
         this.hora = hora;
@@ -139,11 +142,11 @@ public class Orcamento implements Serializable {
         this.total = total;
     }
 
-    public String getFormaPagamento() {
+    public FormaPagamento getFormaPagamento() {
         return formaPagamento;
     }
 
-    public void setFormaPagamento(String formaPagamento) {
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
 
@@ -155,20 +158,20 @@ public class Orcamento implements Serializable {
         this.vezes = vezes;
     }
 
-    public Cliente getIdCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setIdCliente(Cliente idCliente) {
-        this.cliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public Usuario getIdDentista() {
-        return idDentista;
+    public Usuario getDentista() {
+        return dentista;
     }
 
-    public void setIdDentista(Usuario idDentista) {
-        this.idDentista = idDentista;
+    public void setDentista(Usuario dentista) {
+        this.dentista = dentista;
     }
 
     @XmlTransient
@@ -181,21 +184,21 @@ public class Orcamento implements Serializable {
     }
 
     @XmlTransient
-    public List<Parcela> getParcelaList() {
-        return parcelaList;
+    public List<Parcela> getParcelas() {
+        return parcelas;
     }
 
-    public void setParcelaList(List<Parcela> parcelaList) {
-        this.parcelaList = parcelaList;
+    public void setParcelas(List<Parcela> parcelas) {
+        this.parcelas = parcelas;
     }
 
     @XmlTransient
-    public List<Anaminese> getAnamineseList() {
-        return anamineseList;
+    public List<Anaminese> getAnamineses() {
+        return anamineses;
     }
 
-    public void setAnamineseList(List<Anaminese> anamineseList) {
-        this.anamineseList = anamineseList;
+    public void setAnamineses(List<Anaminese> anamineses) {
+        this.anamineses = anamineses;
     }
 
     @Override
@@ -226,6 +229,16 @@ public class Orcamento implements Serializable {
     public void addServico(OrcamentoServico orcamentoServico) {
         orcamentoServico.setOrcamento(this);
         orcamentoServicoList.add(orcamentoServico);
+    }
+
+    public void addAnaminese(Anaminese anaminese) {
+        anaminese.setOrcamento(this);
+        getAnamineses().add(anaminese);
+    }
+
+    public void addParcela(Parcela parcela) {
+        parcela.setOrcamento(this);
+        getParcelas().add(parcela);
     }
 
 }

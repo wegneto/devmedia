@@ -7,6 +7,7 @@ package br.com.devmedia.cursojee.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -112,9 +113,9 @@ public class Cliente implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
-    private List<Orcamento> orcamentoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
-    private List<Anaminese> anamineseList;
+    private List<Orcamento> orcamentos = new LinkedList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private List<Anaminese> anamineses = new LinkedList<>();
 
     public Cliente() {
     }
@@ -133,6 +134,16 @@ public class Cliente implements Serializable {
         this.nomePai = nomePai;
         this.nomeMae = nomeMae;
         this.dataNascimento = dataNascimento;
+    }
+    
+    public void addOrcamento(Orcamento orcamento) {
+        orcamento.setCliente(this);
+        getOrcamentos().add(orcamento);
+    }
+
+    public void addAnaminese(Anaminese anaminese) {
+        anaminese.setCliente(this);
+        getAnamineses().add(anaminese);
     }
 
     public Integer getId() {
@@ -280,21 +291,21 @@ public class Cliente implements Serializable {
     }
 
     @XmlTransient
-    public List<Orcamento> getOrcamentoList() {
-        return orcamentoList;
+    public List<Orcamento> getOrcamentos() {
+        return orcamentos;
     }
 
-    public void setOrcamentoList(List<Orcamento> orcamentoList) {
-        this.orcamentoList = orcamentoList;
+    public void setOrcamentos(List<Orcamento> orcamentos) {
+        this.orcamentos = orcamentos;
     }
 
     @XmlTransient
-    public List<Anaminese> getAnamineseList() {
-        return anamineseList;
+    public List<Anaminese> getAnamineses() {
+        return anamineses;
     }
 
-    public void setAnamineseList(List<Anaminese> anamineseList) {
-        this.anamineseList = anamineseList;
+    public void setAnamineses(List<Anaminese> anamineses) {
+        this.anamineses = anamineses;
     }
 
     @Override

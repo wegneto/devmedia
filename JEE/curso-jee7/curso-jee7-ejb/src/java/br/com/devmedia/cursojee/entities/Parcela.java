@@ -99,12 +99,12 @@ public class Parcela implements Serializable {
         this.pago = pago;
     }
 
-    public Orcamento getIdOrcamento() {
+    public Orcamento getOrcamento() {
         return orcamento;
     }
 
-    public void setIdOrcamento(Orcamento idOrcamento) {
-        this.orcamento = idOrcamento;
+    public void setOrcamento(Orcamento orcamento) {
+        this.orcamento = orcamento;
     }
 
     @Override
