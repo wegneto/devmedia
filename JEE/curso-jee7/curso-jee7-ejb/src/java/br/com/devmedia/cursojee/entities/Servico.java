@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Servicos.findAll", query = "SELECT s FROM Servicos s")})
+    @NamedQuery(name = "Servicos.findAll", query = "SELECT s FROM Servico s")})
 public class Servico implements Serializable {
 
     private static final long serialVersionUID = 1L;
