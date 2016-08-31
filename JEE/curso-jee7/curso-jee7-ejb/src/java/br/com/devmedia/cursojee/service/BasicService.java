@@ -5,10 +5,12 @@
  */
 package br.com.devmedia.cursojee.service;
 
+import java.io.Serializable;
+
 /**
  *
  * @author 43189334587
  */
-public class BasicService {
-    
+public abstract class BasicService implements Serializable {
+
 }
