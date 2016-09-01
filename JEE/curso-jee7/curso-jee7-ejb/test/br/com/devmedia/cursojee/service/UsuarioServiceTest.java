@@ -1,6 +1,9 @@
 package br.com.devmedia.cursojee.service;
 
 import br.com.devmedia.cursojee.entities.Usuario;
+import br.com.devmedia.cursojee.service.repositories.UsuarioRepository;
+import java.security.MessageDigest;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.embeddable.EJBContainer;
@@ -78,21 +81,21 @@ public class UsuarioServiceTest {
         container.close();
     }
 
-    /**
-     * Test of addUsuario method, of class UsuarioService.
-     */
-    //@Test
+    @Test
     public void testAddUsuario() throws Exception {
-        System.out.println("addUsuario");
-        Usuario usuario = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UsuarioService instance = (UsuarioService)container.getContext().lookup("java:global/classes/UsuarioService");
-        Usuario expResult = null;
+        Usuario usuario = new Usuario();
+        usuario.setAdministrador(new Random().nextBoolean());
+        usuario.setDentista(new Random().nextBoolean());
+        usuario.setLogin("loginAdd" + new Random().nextInt());
+        usuario.setNome("Teste de Adicao" + new Random().nextInt());
+        usuario.setSenha(usuario.getLogin());
+        
         Usuario result = instance.addUsuario(usuario);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Usuario resultFromGet = instance.getUsuario(usuario.getId());
+        
+        assertEquals(resultFromGet, result);
+        
+        instance.removeUsuario(resultFromGet);
     }
 
     @Test
@@ -114,69 +117,67 @@ public class UsuarioServiceTest {
         assertEquals(resultFromGet.getNome(), result.getNome());
     }
 
-    /**
-     * Test of removeUsuario method, of class UsuarioService.
-     */
-    //@Test
+    @Test
     public void testRemoveUsuario() throws Exception {
-        System.out.println("removeUsuario");
-        Usuario usuario = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UsuarioService instance = (UsuarioService)container.getContext().lookup("java:global/classes/UsuarioService");
-        instance.removeUsuario(usuario);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Usuario teste = new Usuario();
+        teste.setAdministrador(new Random().nextBoolean());
+        teste.setDentista(new Random().nextBoolean());
+        teste.setLogin("loginRemove" + new Random().nextInt());
+        teste.setNome("Teste de Remoção" + new Random().nextInt());
+        teste.setSenha(teste.getLogin());
+        
+        teste = instance.addUsuario(teste);
+        instance.removeUsuario(teste);
+        
+        Usuario removido = instance.getUsuario(teste.getId());
+        assertNull(removido);
     }
 
-    /**
-     * Test of setPassword method, of class UsuarioService.
-     */
-    //@Test
+    @Test
     public void testSetPassword() throws Exception {
-        System.out.println("setPassword");
-        String password = "";
-        int id = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UsuarioService instance = (UsuarioService)container.getContext().lookup("java:global/classes/UsuarioService");
-        instance.setPassword(password, id);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String senha = "NovaSenha"+new Random().nextInt();
+        String md5 = getMD5(senha);
+        instance.setPassword(senha, usuarioB.getId());
+        Usuario usuario = instance.getUsuario(usuarioB.getId());
+        assertEquals(usuario.getSenha(), md5);
+    }
+    
+    private String getMD5(String message) {
+        String digest = null;
+        
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hash = md.digest(message.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder(2 * hash.length);
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b & 0xff));
+            }
+            digest = sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return digest;
     }
 
-    /**
-     * Test of getUsuarioByLoginPassword method, of class UsuarioService.
-     */
-    //@Test
+    @Test
     public void testGetUsuarioByLoginPassword() throws Exception {
-        System.out.println("getUsuarioByLoginPassword");
-        String login = "";
-        String password = "";
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UsuarioService instance = (UsuarioService)container.getContext().lookup("java:global/classes/UsuarioService");
-        Usuario expResult = null;
+        String login = usuarioA.getLogin();
+        String password = usuarioA.getLogin();
+        Usuario expResult = usuarioA;
         Usuario result = instance.getUsuarioByLoginPassword(login, password);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getUsers method, of class UsuarioService.
-     */
-    //@Test
+    @Test
     public void testGetUsers() throws Exception {
-        System.out.println("getUsers");
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UsuarioService instance = (UsuarioService)container.getContext().lookup("java:global/classes/UsuarioService");
-        List<Usuario> expResult = null;
+        List<Usuario> expResult = new LinkedList<>();
+        expResult.add(usuarioA);
+        expResult.add(usuarioB);
+        expResult.add(usuarioC);
+        
         List<Usuario> result = instance.getUsers();
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(expResult.containsAll(result));
     }
     
 }
