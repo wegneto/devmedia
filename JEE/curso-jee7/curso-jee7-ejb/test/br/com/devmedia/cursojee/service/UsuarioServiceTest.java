@@ -19,6 +19,10 @@ public class UsuarioServiceTest {
     
     private Usuario usuarioC;
     
+    private EJBContainer container;
+    
+    private UsuarioService instance;
+    
     public UsuarioServiceTest() {
     }
     
@@ -31,7 +35,10 @@ public class UsuarioServiceTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
+        instance = (UsuarioService)container.getContext().lookup("java:global/classes/UsuarioService");
+        
         usuarioA = new Usuario();
         usuarioA.setAdministrador(new Random().nextBoolean());
         usuarioA.setDentista(new Random().nextBoolean());
@@ -52,13 +59,23 @@ public class UsuarioServiceTest {
         usuarioC.setLogin("testeLoginB" + new Random().nextInt());
         usuarioC.setNome("testeNomeB" + new Random().nextInt());
         usuarioC.setSenha(usuarioC.getLogin());
+        
+        usuarioA = instance.addUsuario(usuarioA);
+        usuarioB = instance.addUsuario(usuarioB);
+        usuarioC = instance.addUsuario(usuarioC);
     }
     
     @After
     public void tearDown() {
+        instance.removeUsuario(usuarioA);
+        instance.removeUsuario(usuarioB);
+        instance.removeUsuario(usuarioC);
+        
         usuarioA = null;
         usuarioB = null;
         usuarioC = null;
+        
+        container.close();
     }
 
     /**
@@ -78,44 +95,23 @@ public class UsuarioServiceTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getUsuario method, of class UsuarioService.
-     */
     @Test
-    public void testGetUsuario() throws Exception {
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UsuarioService instance = (UsuarioService)container.getContext().lookup("java:global/classes/UsuarioService");
-        
-        usuarioA = instance.addUsuario(usuarioA);
-        usuarioB = instance.addUsuario(usuarioB);
-        usuarioC = instance.addUsuario(usuarioC);
-        
+    public void testGetUsuario() {
         Usuario expResult = usuarioB;
         Usuario result = instance.getUsuario(usuarioB.getId());
         assertEquals(expResult, result);
-        
-        instance.removeUsuario(usuarioA);
-        instance.removeUsuario(usuarioB);
-        instance.removeUsuario(usuarioC);
-        
-        container.close();
     }
 
-    /**
-     * Test of setUsuario method, of class UsuarioService.
-     */
-    //@Test
-    public void testSetUsuario() throws Exception {
-        System.out.println("setUsuario");
-        Usuario usuario = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UsuarioService instance = (UsuarioService)container.getContext().lookup("java:global/classes/UsuarioService");
-        Usuario expResult = null;
+    @Test
+    public void testSetUsuario() {
+        Usuario usuario = usuarioC;
+        Usuario expResult = usuarioC;
+        usuario.setNome("Novo nome " + new Random().nextInt());
+        
         Usuario result = instance.setUsuario(usuario);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Usuario resultFromGet = instance.getUsuario(usuarioC.getId());
+        assertEquals(expResult.getNome(), result.getNome());
+        assertEquals(resultFromGet.getNome(), result.getNome());
     }
 
     /**
