@@ -2,6 +2,7 @@ package br.com.devmedia.cursojee.service;
 
 import br.com.devmedia.cursojee.entities.Servico;
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.embeddable.EJBContainer;
@@ -73,47 +74,66 @@ public class ServicoServiceTest {
 
     @Test
     public void testAddServico() throws Exception {
-        Servico servico = null;
-        Servico expResult = null;
+        Servico servico = new Servico();
+        servico.setNome("Teste de inclusão " + new Random().nextInt());
+        servico.setCusto(new BigDecimal(new Random().nextFloat()));
         Servico result = instance.addServico(servico);
-        assertEquals(expResult, result);
+        Servico expResult = instance.getServico(result.getId());
+        instance.removeServico(result);
+        assertEquals(expResult.getNome(), result.getNome());
     }
 
     @Test
     public void testSetServico() throws Exception {
-        Servico servico = null;
-        Servico expResult = null;
+        Servico servico = servicoA;
+        String novoNome = "Teste de alteração " + new Random().nextInt();
+        servico.setNome(novoNome);
+        
         Servico result = instance.setServico(servico);
-        assertEquals(expResult, result);
+        Servico expResult = instance.getServico(servico.getId());
+        
+        assertEquals(novoNome, expResult.getNome());
     }
 
     @Test
     public void testRemoveServico() throws Exception {
-        Servico servico = null;
+        Servico servico = new Servico();
+        servico.setNome("Teste de remocao " + new Random().nextInt());
+        servico.setCusto(new BigDecimal(new Random().nextFloat()));
+        
+        servico = instance.addServico(servico);
+        
         instance.removeServico(servico);
+        
+        Servico removido = instance.getServico(servico.getId());
+        assertNull(removido);
     }
 
     @Test
     public void testGetServico() throws Exception {
-        int id = 0;
-        Servico expResult = null;
-        Servico result = instance.getServico(id);
-        assertEquals(expResult, result);
+        Servico expResult = servicoA;
+        Servico result = instance.getServico(servicoA.getId());
+        assertEquals(expResult.getId(), result.getId());
     }
 
     @Test
     public void testGetServicos() throws Exception {
-        List<Servico> expResult = null;
+        List<Servico> expResult = new LinkedList<>();
+        expResult.add(servicoA);
+        expResult.add(servicoB);
+        expResult.add(servicoC);
+        
         List<Servico> result = instance.getServicos();
-        assertEquals(expResult, result);
+        assertTrue(expResult.containsAll(result));
     }
 
     @Test
     public void testGetServicoByNome() throws Exception {
-        String nome = "";
-        List<Servico> expResult = null;
-        List<Servico> result = instance.getServicoByNome(nome);
-        assertEquals(expResult, result);
+        assertEquals(3, instance.getServicoByNome("testeServico").size());
+        assertEquals(1, instance.getServicoByNome("testeServicoA").size());
+        assertEquals(1, instance.getServicoByNome("testeServicoB").size());
+        assertEquals(1, instance.getServicoByNome("testeServicoC").size());
+        assertEquals(0, instance.getServicoByNome("xpto" + new Random().nextInt()).size());
     }
     
 }
