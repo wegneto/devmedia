@@ -1,7 +1,6 @@
 package br.com.devmedia.cursojee.service;
 
 import br.com.devmedia.cursojee.entities.Usuario;
-import br.com.devmedia.cursojee.service.repositories.UsuarioRepository;
 import java.security.MessageDigest;
 import java.util.LinkedList;
 import java.util.List;
