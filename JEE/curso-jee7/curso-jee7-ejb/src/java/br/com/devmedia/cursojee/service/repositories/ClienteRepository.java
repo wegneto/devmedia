@@ -28,7 +28,7 @@ public class ClienteRepository extends BasicRepository {
         removeEntity(cliente);
     }
 
-    public List<Cliente> getClienteByName(String nome) {
+    public List<Cliente> getClienteByNome(String nome) {
         String query = "select c from Cliente c where c.nome like ?!";
         return getList(Cliente.class, query, nome + "%");
     }
