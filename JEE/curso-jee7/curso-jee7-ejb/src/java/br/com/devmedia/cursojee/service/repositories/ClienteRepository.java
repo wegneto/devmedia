@@ -29,7 +29,7 @@ public class ClienteRepository extends BasicRepository {
     }
 
     public List<Cliente> getClienteByNome(String nome) {
-        String query = "select c from Cliente c where c.nome like ?!";
+        String query = "select c from Cliente c where c.nome like ?1";
         return getList(Cliente.class, query, nome + "%");
     }
 
