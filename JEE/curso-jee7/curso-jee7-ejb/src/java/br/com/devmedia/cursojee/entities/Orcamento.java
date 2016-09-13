@@ -25,18 +25,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author 43189334587
  */
 @Entity
+@Table(name = "orcamento")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Orcamento.findAll", query = "SELECT o FROM Orcamento o")})
@@ -44,7 +47,7 @@ public class Orcamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
@@ -69,9 +72,9 @@ public class Orcamento implements Serializable {
     private BigDecimal total;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 9)
     @Column(name = "forma_pagamento", nullable = false, length = 9)
     @Enumerated(EnumType.STRING)
+    @PodamExclude
     private FormaPagamento formaPagamento;
     private Integer vezes;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id", nullable = false)
@@ -80,10 +83,13 @@ public class Orcamento implements Serializable {
     @JoinColumn(name = "id_dentista", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Usuario dentista;
+    @PodamExclude
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
     private List<OrcamentoServico> orcamentoServicoList = new LinkedList<>();
+    @PodamExclude
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
     private List<Parcela> parcelas = new LinkedList<>();
+    @PodamExclude
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
     private List<Anaminese> anamineses = new LinkedList<>();
 

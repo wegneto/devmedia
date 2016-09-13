@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -36,7 +37,7 @@ public class OrcamentoServico implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
@@ -51,9 +52,11 @@ public class OrcamentoServico implements Serializable {
     private String observacoes;
     @JoinColumn(name = "id_servico", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
+    @PodamExclude
     private Servico servico;
     @JoinColumn(name = "id_orcamento", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
+    @PodamExclude
     private Orcamento orcamento;
 
     public OrcamentoServico() {

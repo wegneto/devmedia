@@ -5,8 +5,12 @@
  */
 package br.com.devmedia.cursojee.service;
 
+import br.com.devmedia.cursojee.entities.Cliente;
+import br.com.devmedia.cursojee.entities.FormaPagamento;
 import br.com.devmedia.cursojee.entities.Orcamento;
 import br.com.devmedia.cursojee.entities.OrcamentoServico;
+import br.com.devmedia.cursojee.entities.Servico;
+import br.com.devmedia.cursojee.entities.Usuario;
 import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
 import org.junit.After;
@@ -15,6 +19,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
@@ -24,11 +30,13 @@ public class OrcamentoServiceTest {
     
     private EJBContainer container;
     
-    private OrcamentoService instance;
+    private OrcamentoService orcamentoService;
     
     private ClienteService clienteService;
     
     private UsuarioService usuarioService;
+    
+    private ServicoService servicoService;
     
     public OrcamentoServiceTest() {
     }
@@ -44,8 +52,10 @@ public class OrcamentoServiceTest {
     @Before
     public void setUp() throws Exception {
         container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        instance = (OrcamentoService)container.getContext().lookup("java:global/classes/OrcamentoService");
-        
+        orcamentoService = (OrcamentoService)container.getContext().lookup("java:global/classes/OrcamentoService");
+        usuarioService = (UsuarioService)container.getContext().lookup("java:global/classes/UsuarioService");
+        clienteService = (ClienteService)container.getContext().lookup("java:global/classes/ClienteService");
+        servicoService = (ServicoService)container.getContext().lookup("java:global/classes/ServicoService");
     }
     
     @After
@@ -53,150 +63,122 @@ public class OrcamentoServiceTest {
         container.close();
     }
 
-    /**
-     * Test of addOrcamento method, of class OrcamentoService.
-     */
     @Test
     public void testAddOrcamento() throws Exception {
         System.out.println("addOrcamento");
-        Orcamento orcamento = null;
-        Orcamento expResult = null;
-        Orcamento result = instance.addOrcamento(orcamento);
+        PodamFactory factory = new PodamFactoryImpl();
+        
+        Cliente cliente = new Cliente();
+        factory.populatePojo(cliente);
+        cliente = clienteService.addCliente(cliente);
+        
+        Usuario dentista = new Usuario();
+        factory.populatePojo(dentista);
+        dentista = usuarioService.addUsuario(dentista);
+        
+        Servico servico = new Servico();
+        factory.populatePojo(servico);
+        servico = servicoService.addServico(servico);
+        
+        Orcamento orcamento = new Orcamento();
+        factory.populatePojo(orcamento);
+        orcamento.setCliente(cliente);
+        orcamento.setDentista(dentista);
+        orcamento.setFormaPagamento(FormaPagamento.CARTAO);
+        
+        OrcamentoServico orcamentoServico = new OrcamentoServico();
+        factory.populatePojo(orcamentoServico);
+        orcamentoServico.setOrcamento(orcamento);
+        orcamentoServico.setServico(servico);
+        
+        orcamento.addServico(orcamentoServico);
+
+        Orcamento result = orcamentoService.addOrcamento(orcamento);        
+        Orcamento expResult = orcamentoService.getOrcamento(result.getId());
+        
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        orcamentoService.removeOrcamento(orcamento);
+        servicoService.removeServico(servico);
+        usuarioService.removeUsuario(dentista);
+        clienteService.removeCliente(cliente);
     }
 
-    /**
-     * Test of setOrcamento method, of class OrcamentoService.
-     */
-    @Test
+    //@Test
     public void testSetOrcamento() throws Exception {
         System.out.println("setOrcamento");
         Orcamento orcamento = null;
         Orcamento expResult = null;
-        Orcamento result = instance.setOrcamento(orcamento);
+        Orcamento result = orcamentoService.setOrcamento(orcamento);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of removeOrcamento method, of class OrcamentoService.
-     */
-    @Test
+    //@Test
     public void testRemoveOrcamento() throws Exception {
         System.out.println("removeOrcamento");
         Orcamento orcamento = null;
-        instance.removeOrcamento(orcamento);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        orcamentoService.removeOrcamento(orcamento);
     }
 
-    /**
-     * Test of getOrcamento method, of class OrcamentoService.
-     */
-    @Test
+    //@Test
     public void testGetOrcamento() throws Exception {
         System.out.println("getOrcamento");
         int id = 0;
         Orcamento expResult = null;
-        Orcamento result = instance.getOrcamento(id);
+        Orcamento result = orcamentoService.getOrcamento(id);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getServico method, of class OrcamentoService.
-     */
-    @Test
+    //@Test
     public void testGetServico() throws Exception {
         System.out.println("getServico");
         int orcamentoId = 0;
         List<OrcamentoServico> expResult = null;
-        List<OrcamentoServico> result = instance.getServico(orcamentoId);
+        List<OrcamentoServico> result = orcamentoService.getServico(orcamentoId);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of addOrcamentoServico method, of class OrcamentoService.
-     */
-    @Test
+    //@Test
     public void testAddOrcamentoServico() throws Exception {
         System.out.println("addOrcamentoServico");
         OrcamentoServico orcamentoServico = null;
         OrcamentoServico expResult = null;
-        OrcamentoServico result = instance.addOrcamentoServico(orcamentoServico);
+        OrcamentoServico result = orcamentoService.addOrcamentoServico(orcamentoServico);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of setOrcamentoServico method, of class OrcamentoService.
-     */
-    @Test
+    //@Test
     public void testSetOrcamentoServico() throws Exception {
         System.out.println("setOrcamentoServico");
         OrcamentoServico orcamentoServico = null;
         OrcamentoServico expResult = null;
-        OrcamentoServico result = instance.setOrcamentoServico(orcamentoServico);
+        OrcamentoServico result = orcamentoService.setOrcamentoServico(orcamentoServico);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getOrcamentoServico method, of class OrcamentoService.
-     */
-    @Test
+    //@Test
     public void testGetOrcamentoServico() throws Exception {
         System.out.println("getOrcamentoServico");
         int id = 0;
         OrcamentoServico expResult = null;
-        OrcamentoServico result = instance.getOrcamentoServico(id);
+        OrcamentoServico result = orcamentoService.getOrcamentoServico(id);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of removeOrcamentoServico method, of class OrcamentoService.
-     */
-    @Test
+    //@Test
     public void testRemoveOrcamentoServico() throws Exception {
         System.out.println("removeOrcamentoServico");
         OrcamentoServico orcamentoServico = null;
-        instance.removeOrcamentoServico(orcamentoServico);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        orcamentoService.removeOrcamentoServico(orcamentoServico);
     }
 
-    /**
-     * Test of getOrcamentos method, of class OrcamentoService.
-     */
-    @Test
+    //@Test
     public void testGetOrcamentos() throws Exception {
         System.out.println("getOrcamentos");
         int clienteId = 0;
         List<Orcamento> expResult = null;
-        List<Orcamento> result = instance.getOrcamentos(clienteId);
+        List<Orcamento> result = orcamentoService.getOrcamentos(clienteId);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

@@ -23,6 +23,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -55,6 +56,7 @@ public class Servico implements Serializable {
     @Column(length = 45)
     private String servicoscol;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "servico")
+    @PodamExclude
     private List<OrcamentoServico> orcamentoServicoList;
 
     public Servico() {
