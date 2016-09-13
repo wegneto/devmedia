@@ -27,6 +27,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -114,8 +115,10 @@ public class Cliente implements Serializable {
     @Column(name = "data_nascimento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
+    @PodamExclude
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Orcamento> orcamentos = new LinkedList<>();
+    @PodamExclude
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Anaminese> anamineses = new LinkedList<>();
 
