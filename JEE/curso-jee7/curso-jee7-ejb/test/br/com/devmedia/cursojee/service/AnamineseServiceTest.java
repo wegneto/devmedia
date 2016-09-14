@@ -18,91 +18,108 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 public class AnamineseServiceTest {
-    
+
     private EJBContainer container;
-    
+
     private AnamineseService anamineseService;
-    
+
     private OrcamentoService orcamentoService;
-    
+
     private ClienteService clienteService;
-    
+
     private UsuarioService usuarioService;
-    
+
     private ServicoService servicoService;
-    
+
+    private Cliente cliente;
+
+    private PodamFactory podam;
+
+    private Orcamento orcamento;
+
+    private Servico servico;
+
+    private Usuario dentista;
+
     public AnamineseServiceTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() throws Exception {
         container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        anamineseService = (AnamineseService)container.getContext().lookup("java:global/classes/AnamineseService");
-        orcamentoService = (OrcamentoService)container.getContext().lookup("java:global/classes/OrcamentoService");
-        usuarioService = (UsuarioService)container.getContext().lookup("java:global/classes/UsuarioService");
-        clienteService = (ClienteService)container.getContext().lookup("java:global/classes/ClienteService");
-        servicoService = (ServicoService)container.getContext().lookup("java:global/classes/ServicoService");
+        anamineseService = (AnamineseService) container.getContext().lookup("java:global/classes/AnamineseService");
+        orcamentoService = (OrcamentoService) container.getContext().lookup("java:global/classes/OrcamentoService");
+        usuarioService = (UsuarioService) container.getContext().lookup("java:global/classes/UsuarioService");
+        clienteService = (ClienteService) container.getContext().lookup("java:global/classes/ClienteService");
+        servicoService = (ServicoService) container.getContext().lookup("java:global/classes/ServicoService");
+
+        podam = new PodamFactoryImpl();
+
+        cliente = new Cliente();
+        podam.populatePojo(cliente);
+        cliente = clienteService.addCliente(cliente);
+
+        dentista = new Usuario();
+        podam.populatePojo(dentista);
+        dentista = usuarioService.addUsuario(dentista);
+
+        servico = new Servico();
+        podam.populatePojo(servico);
+        servico = servicoService.addServico(servico);
+
+        orcamento = new Orcamento();
+        podam.populatePojo(orcamento);
+        orcamento.setCliente(cliente);
+        orcamento.setDentista(dentista);
+        orcamento.setFormaPagamento(FormaPagamento.CARTAO);
+        orcamento = orcamentoService.addOrcamento(orcamento);
     }
-    
+
     @After
     public void tearDown() {
+        orcamentoService.removeOrcamento(orcamento);
+        servicoService.removeServico(servico);
+        usuarioService.removeUsuario(dentista);
+        clienteService.removeCliente(cliente);
+
         container.close();
     }
 
     @Test
     public void testAddAnaminese() throws Exception {
         System.out.println("addAnaminese");
-        
+
         Anaminese anaminese = prepararObjeto();
-        
+
         Anaminese result = anamineseService.addAnaminese(anaminese);
         Anaminese expResult = anamineseService.getAnaminese(result.getId());
-        
+
         assertEquals(expResult, result);
+
+        anamineseService.removeAnaminese(anaminese);
     }
-    
+
     private Anaminese prepararObjeto() {
-        PodamFactory podam = new PodamFactoryImpl();
-        
-        Cliente cliente = new Cliente();
-        podam.populatePojo(cliente);
-        cliente = clienteService.addCliente(cliente);
-        
-        Usuario dentista = new Usuario();
-        podam.populatePojo(dentista);
-        dentista = usuarioService.addUsuario(dentista);
-        
-        Servico servico = new Servico();
-        podam.populatePojo(servico);
-        servico = servicoService.addServico(servico);
-        
-        Orcamento orcamento = new Orcamento();
-        podam.populatePojo(orcamento);
-        orcamento.setCliente(cliente);
-        orcamento.setDentista(dentista);
-        orcamento.setFormaPagamento(FormaPagamento.CARTAO);
-        orcamento = orcamentoService.addOrcamento(orcamento);
-        
         Anaminese anaminese = new Anaminese();
         podam.populatePojo(anaminese);
         anaminese.setCliente(cliente);
         anaminese.setOrcamento(orcamento);
-        
+
         return anaminese;
     }
 
     //@Test
     public void testSetAnaminese() throws Exception {
         System.out.println("setAnaminese");
-        Anaminese anaminese = null;
+        Anaminese anaminese = prepararObjeto();
         Anaminese expResult = null;
         Anaminese result = anamineseService.setAnaminese(anaminese);
     }
@@ -123,22 +140,46 @@ public class AnamineseServiceTest {
         assertEquals(expResult, result);
     }
 
-    //@Test
+    @Test
     public void testGetAnaminesesByCliente() throws Exception {
         System.out.println("getAnaminesesByCliente");
-        Cliente cliente = null;
-        List<Anaminese> expResult = null;
+
+        Anaminese anaminese1 = prepararObjeto();
+        anamineseService.addAnaminese(anaminese1);
+
+        Anaminese anaminese2 = prepararObjeto();
+        anamineseService.addAnaminese(anaminese2);
+
+        Anaminese anaminese3 = prepararObjeto();
+        anamineseService.addAnaminese(anaminese3);
+
         List<Anaminese> result = anamineseService.getAnaminesesByCliente(cliente);
-        assertEquals(expResult, result);
+        assertEquals(3, result.size());
+
+        anamineseService.removeAnaminese(anaminese1);
+        anamineseService.removeAnaminese(anaminese2);
+        anamineseService.removeAnaminese(anaminese3);
     }
 
-    //@Test
+    @Test
     public void testGetAnaminesesByOrcamento() throws Exception {
         System.out.println("getAnaminesesByOrcamento");
-        Orcamento orcamento = null;
-        List<Anaminese> expResult = null;
+        
+        Anaminese anaminese1 = prepararObjeto();
+        anamineseService.addAnaminese(anaminese1);
+
+        Anaminese anaminese2 = prepararObjeto();
+        anamineseService.addAnaminese(anaminese2);
+
+        Anaminese anaminese3 = prepararObjeto();
+        anamineseService.addAnaminese(anaminese3);
+        
         List<Anaminese> result = anamineseService.getAnaminesesByOrcamento(orcamento);
-        assertEquals(expResult, result);
+        assertEquals(3, result.size());
+        
+        anamineseService.removeAnaminese(anaminese1);
+        anamineseService.removeAnaminese(anaminese2);
+        anamineseService.removeAnaminese(anaminese3);
     }
-    
+
 }
