@@ -11,29 +11,25 @@ import br.com.devmedia.cursojee.entities.Orcamento;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-/**
- *
- * @author 43189334587
- */
 public class AnamineseRepository extends BasicRepository {
 
     public AnamineseRepository(EntityManager entityManager) {
         super(entityManager);
     }
 
-    public Anaminese addCliente(Anaminese anaminese) {
+    public Anaminese addAnaminese(Anaminese anaminese) {
         return addEntity(anaminese);
     }
 
-    public Anaminese setCliente(Anaminese anaminese) {
+    public Anaminese setAnaminese(Anaminese anaminese) {
         return setEntity(anaminese);
     }
 
-    public Anaminese getCliente(int id) {
+    public Anaminese getAnaminese(int id) {
         return getEntity(Anaminese.class, id);
     }
 
-    public void removeCliente(Anaminese anaminese) {
+    public void removeAnaminese(Anaminese anaminese) {
         removeEntity(anaminese);
     }
     

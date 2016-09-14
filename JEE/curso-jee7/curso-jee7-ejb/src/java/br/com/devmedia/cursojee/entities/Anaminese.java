@@ -17,15 +17,14 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import uk.co.jemos.podam.common.PodamExclude;
 
-/**
- *
- * @author 43189334587
- */
 @Entity
+@Table(name = "anaminese")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Anaminese.findAll", query = "SELECT a FROM Anaminese a")})
@@ -33,7 +32,7 @@ public class Anaminese implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
@@ -79,9 +78,11 @@ public class Anaminese implements Serializable {
     private String observacoes;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
+    @PodamExclude
     private Cliente cliente;
     @JoinColumn(name = "id_orcamento", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
+    @PodamExclude
     private Orcamento orcamento;
 
     public Anaminese() {
