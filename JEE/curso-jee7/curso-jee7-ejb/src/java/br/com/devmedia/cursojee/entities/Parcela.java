@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.devmedia.cursojee.entities;
 
 import java.io.Serializable;
@@ -17,14 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import uk.co.jemos.podam.common.PodamExclude;
 
-/**
- *
- * @author 43189334587
- */
 @Entity
+@Table(name = "parcela")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Parcela.findAll", query = "SELECT p FROM Parcela p")})
@@ -32,7 +26,7 @@ public class Parcela implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
@@ -51,6 +45,7 @@ public class Parcela implements Serializable {
     private boolean pago;
     @JoinColumn(name = "id_orcamento", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
+    @PodamExclude
     private Orcamento orcamento;
 
     public Parcela() {
