@@ -50,17 +50,17 @@ public class FinanceiroRepository extends BasicRepository {
         return getList(Parcela.class, query, idOrcamento, Boolean.TRUE);
     }
 
-    public List<Parcela> getParcelasByCustomer(int idCliente) {
+    public List<Parcela> getParcelasByCliente(int idCliente) {
         String query = "select p from Parcela p where p.orcamento.cliente.id = ?1";
         return getList(Parcela.class, query, idCliente);
     }
 
-    public List<Parcela> getParcelasEmAbertoByCustomer(int idCliente) {
+    public List<Parcela> getParcelasEmAbertoByCliente(int idCliente) {
         String query = "select p from Parcela p where p.orcamento.cliente.id = ?1 and p.pago = ?2";
         return getList(Parcela.class, query, idCliente, Boolean.FALSE);
     }
 
-    public List<Parcela> getParcelasPagasByCustomer(int idCliente) {
+    public List<Parcela> getParcelasPagasByCliente(int idCliente) {
         String query = "select p from Parcela p where p.orcamento.cliente.id = ?1 and p.pago = ?2";
         return getList(Parcela.class, query, idCliente, Boolean.TRUE);
     }
