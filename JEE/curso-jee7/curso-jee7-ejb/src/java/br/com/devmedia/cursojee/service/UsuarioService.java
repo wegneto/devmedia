@@ -55,7 +55,12 @@ public class UsuarioService extends BasicService {
     }
     
     public Usuario getUsuarioByLoginPassword(String login, String password) {
-        return usrRepo.getUsuarioByLoginPassword(login, password);
+        try {
+            return usrRepo.getUsuarioByLoginPassword(login, password);
+        } catch (Exception e) {
+            return null;
+        }
+        
     }
     
     public List<Usuario> getUsers() {

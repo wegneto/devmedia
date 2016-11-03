@@ -1,3 +1,8 @@
+.msg_error {
+    color: red;
+    font-weight: bolder;
+}
+
 .logo {
     width: 100px; 
 }
