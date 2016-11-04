@@ -72,7 +72,7 @@ public class UsuarioControl extends BasicControl implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, fm);
             return "/login.faces";
         } else {
-            return "/index.faces";
+            return "/restrito/index.faces?faces-redirect=true";
         }
     }
     

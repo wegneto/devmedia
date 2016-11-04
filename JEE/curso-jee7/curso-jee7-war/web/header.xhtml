@@ -6,7 +6,7 @@
     <h:graphicImage value="/resources/images/logo.png" styleClass="logo" />
     <span style="float: right;">
         <c:if test="#{usuarioControl.loggedUser ne null}" >
-            Usuário logado: #{usuarioControl.loggedUser.nome} | <a href="SairServlet">Sair</a>
+            Usuário logado: #{usuarioControl.loggedUser.nome} | <a href="#{request.contextPath}/SairServlet">Sair</a>
         </c:if>
     </span>
     <span style="font-weight: bolder; font-size: xx-large">
