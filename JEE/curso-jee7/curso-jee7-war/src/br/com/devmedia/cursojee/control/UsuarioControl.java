@@ -3,6 +3,7 @@ package br.com.devmedia.cursojee.control;
 import br.com.devmedia.cursojee.entities.Usuario;
 import br.com.devmedia.cursojee.service.UsuarioService;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -73,6 +74,11 @@ public class UsuarioControl extends BasicControl implements Serializable {
         } else {
             return "/index.faces";
         }
+    }
+    
+    @PostConstruct
+    public void postConstruct() {
+        System.out.println("[DevMedia] UsuarioControl iniciou!");
     }
     
 }
