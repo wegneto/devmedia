@@ -118,6 +118,18 @@ public class AuthFilter implements Filter {
             return;
         }
         
+        if (!usuarioControl.getLoggedUser().getDentista() && !usuarioControl.getLoggedUser().getAdministrador()) {
+            ((HttpServletResponse) response).sendRedirect(((HttpServletRequest)request).getContextPath() + "/login.faces?msg_erro=");
+            return;
+        }
+        
+        String requestPath = ((HttpServletRequest) request).getRequestURI().toLowerCase();
+        
+        if (requestPath.contains("/restrito/admin/") && !usuarioControl.getLoggedUser().getAdministrador()) {
+            ((HttpServletResponse) response).sendRedirect(((HttpServletRequest)request).getContextPath() + "/restrito/sempermissao.faces");
+            return;
+        }
+        
         Throwable problem = null;
         try {
             chain.doFilter(request, response);
