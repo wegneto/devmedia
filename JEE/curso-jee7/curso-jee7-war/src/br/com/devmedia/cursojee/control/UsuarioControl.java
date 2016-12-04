@@ -3,13 +3,13 @@ package br.com.devmedia.cursojee.control;
 import br.com.devmedia.cursojee.entities.Usuario;
 import br.com.devmedia.cursojee.service.UsuarioService;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.print.attribute.standard.Severity;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -31,6 +31,13 @@ public class UsuarioControl extends BasicControl implements Serializable {
     @NotEmpty(message = "A senha não pode ser vazia")
     @Length(message = "Sua senha deve conter no mínimo 3 caracteres")
     private String password;
+    
+    @NotEmpty(message = "Um nome válido deve ser especificado")
+    @NotNull(message = "Um nome válido deve ser especificado")
+    @Length(min = 3, message = "Um nome com mais de 3 letras deve ser especificado.")
+    private String localizar;
+    
+    private List<Usuario> filtrado;
 
     public UsuarioService getService() {
         return service;
@@ -79,6 +86,31 @@ public class UsuarioControl extends BasicControl implements Serializable {
     @PostConstruct
     public void postConstruct() {
         System.out.println("[DevMedia] UsuarioControl iniciou!");
+    }
+    
+    public List<Usuario> getUsers() {
+        return service.getUsers();
+    }
+    
+    public String getLocalizar() {
+        return localizar;
+    }
+
+    public void setLocalizar(String localizar) {
+        this.localizar = localizar;
+    }
+
+    public List<Usuario> getFiltrado() {
+        return filtrado;
+    }
+
+    public void setFiltrado(List<Usuario> filtrado) {
+        this.filtrado = filtrado;
+    }
+    
+    public String doLocalizar() {
+        filtrado = service.getUsersByName(getLocalizar());
+        return "usuarios.faces";
     }
     
 }

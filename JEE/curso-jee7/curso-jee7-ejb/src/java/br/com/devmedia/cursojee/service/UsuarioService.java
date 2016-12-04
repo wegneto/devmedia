@@ -67,4 +67,8 @@ public class UsuarioService extends BasicService {
         return usrRepo.getUsers();
     }
     
+    public List<Usuario> getUsersByName(String name) {
+        return usrRepo.getUsuariosByName(name);
+    }
+    
 }
