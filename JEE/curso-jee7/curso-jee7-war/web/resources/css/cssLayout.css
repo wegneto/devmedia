@@ -1,3 +1,11 @@
+.tabela_basica {
+    font-size: small;
+    border-width: medium;
+    border-style: groove;
+    width: 100%;
+    text-align: center;
+}
+
 .msg_error {
     color: red;
     font-weight: bolder;

@@ -14,12 +14,12 @@
         <h:form>
             <table>
                 <tr>
-                    <td>Localizar usuário:</td>
-                    <td><h:inputText value="#{usuarioControl.localizar}" /></td>
-                    <td><h:commandButton action="#{usuarioControl.doLocalizar()}" value="Localizar"/></td>    
+                    <td width="15%">Localizar usuário:</td>
+                    <td width="80%"><h:inputText style="width: 100%" value="#{usuarioControl.localizar}" /></td>
+                    <td width="5%"><h:commandButton action="#{usuarioControl.doLocalizar()}" value="Localizar"/></td>    
                 </tr>
             </table>
-            <h:dataTable value="#{usuarioControl.filtrado}" var="item">
+            <h:dataTable styleClass="tabela_basica" value="#{usuarioControl.filtrado}" var="item">
                 <h:column>
                     <f:facet name="header">
                         Id
@@ -45,6 +45,7 @@
                     #{item.dentista}
                 </h:column>
             </h:dataTable>
+            <h:commandButton action="" value="Adicionar Usuário"/>
         </h:form>
     </ui:define>
 

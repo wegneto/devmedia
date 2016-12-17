@@ -32,12 +32,11 @@ public class UsuarioControl extends BasicControl implements Serializable {
     @Length(message = "Sua senha deve conter no mínimo 3 caracteres")
     private String password;
     
-    @NotEmpty(message = "Um nome válido deve ser especificado")
-    @NotNull(message = "Um nome válido deve ser especificado")
-    @Length(min = 3, message = "Um nome com mais de 3 letras deve ser especificado.")
     private String localizar;
     
     private List<Usuario> filtrado;
+    
+    private Usuario usuarioSelected;
 
     public UsuarioService getService() {
         return service;
@@ -101,6 +100,9 @@ public class UsuarioControl extends BasicControl implements Serializable {
     }
 
     public List<Usuario> getFiltrado() {
+        if (filtrado == null) {
+            return getUsers();
+        }
         return filtrado;
     }
 
@@ -111,6 +113,10 @@ public class UsuarioControl extends BasicControl implements Serializable {
     public String doLocalizar() {
         filtrado = service.getUsersByName(getLocalizar());
         return "usuarios.faces";
+    }
+    
+    public String addUsuario() {
+        return "/restrito/addUsuario.faces";
     }
     
 }
