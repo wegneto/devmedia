@@ -119,7 +119,7 @@ public class AuthFilter implements Filter {
         }
         
         if (!usuarioControl.getLoggedUser().getDentista() && !usuarioControl.getLoggedUser().getAdministrador()) {
-            ((HttpServletResponse) response).sendRedirect(((HttpServletRequest)request).getContextPath() + "/login.faces?msg_erro=");
+            ((HttpServletResponse) response).sendRedirect(((HttpServletRequest)request).getContextPath() + "/login.faces?msg_erro=Não pode acessar");
             return;
         }
         

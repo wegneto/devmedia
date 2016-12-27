@@ -38,6 +38,14 @@ public class UsuarioControl extends BasicControl implements Serializable {
     
     private Usuario usuarioSelected;
 
+    public Usuario getUsuarioSelected() {
+        return usuarioSelected;
+    }
+
+    public void setUsuarioSelected(Usuario usuarioSelected) {
+        this.usuarioSelected = usuarioSelected;
+    }
+
     public UsuarioService getService() {
         return service;
     }
@@ -116,7 +124,13 @@ public class UsuarioControl extends BasicControl implements Serializable {
     }
     
     public String addUsuario() {
+        setUsuarioSelected(new Usuario());
         return "/restrito/addUsuario.faces";
+    }
+    
+    public String createUsuario() {
+        setFiltrado(null);
+        return "/restrito/usuarios.faces";
     }
     
 }

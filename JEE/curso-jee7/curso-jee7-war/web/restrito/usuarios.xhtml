@@ -45,7 +45,7 @@
                     #{item.dentista}
                 </h:column>
             </h:dataTable>
-            <h:commandButton action="" value="Adicionar Usuário"/>
+            <h:commandButton rendered="#{usuarioControl.loggedUser.administrador}" action="#{usuarioControl.addUsuario}" value="Adicionar Usuário"/>
         </h:form>
     </ui:define>
 

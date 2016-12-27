@@ -22,6 +22,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.validator.constraints.Length;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -43,27 +44,27 @@ public class Usuario implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
     @Column(nullable = false, length = 255)
+    @Length(min = 3, max = 255, message = "O nome deve conter o mínimo de 3 caracteres")
     private String nome;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
     @Column(nullable = false, length = 255)
+    @Length(min = 5, max = 255, message = "O login deve conter o mínimo de 5 caracteres")
     private String login;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 32)
     @Column(nullable = false, length = 32)
+    @Length(min = 5, max = 255, message = "A senha deve conter o mínimo de 5 caracteres")
     private String senha;
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false)
-    private boolean administrador;
+    private boolean administrador = false;
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false)
-    private boolean dentista;
+    private boolean dentista = true;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dentista")
     @PodamExclude
     private List<Orcamento> orcamentoList;
