@@ -34,7 +34,7 @@
                     <td><h:selectBooleanCheckbox value="#{usuarioControl.usuarioSelected.administrador}" /></td>
                 </tr>
             </table>
-            <h:commandButton action="#{usuarioControl.createUsuario()}" value="Cadastrar"/> <h:commandButton action="usuarios.faces" value="Cancelar"/>
+            <h:commandButton action="#{usuarioControl.createUsuario()}" value="Cadastrar"/> <h:commandButton action="usuarios.faces" value="Cancelar" immediate="true"/>
         </h:form>
     </ui:define>
 

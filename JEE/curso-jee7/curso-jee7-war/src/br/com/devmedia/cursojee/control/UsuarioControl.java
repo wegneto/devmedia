@@ -130,7 +130,20 @@ public class UsuarioControl extends BasicControl implements Serializable {
     
     public String createUsuario() {
         setFiltrado(null);
+        service.addUsuario(usuarioSelected);
         return "/restrito/usuarios.faces";
+    }
+    
+    public String removeUsuario() {
+        return "/restrito/usuarios.faces";
+    }
+    
+    public String editUsuario() {
+        return "/restrito/editUsuario.faces";
+    }
+    
+    public String editSenha() {
+        return "/restrito/editSenha.faces";
     }
     
 }
