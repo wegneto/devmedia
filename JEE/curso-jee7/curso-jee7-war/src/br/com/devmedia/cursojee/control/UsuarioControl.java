@@ -135,6 +135,14 @@ public class UsuarioControl extends BasicControl implements Serializable {
     }
     
     public String removeUsuario() {
+        setFiltrado(null);
+        if (usuarioSelected.equals(loggedUser)) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não é possível excluir o usuário autenticado no momento", null);
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+        } else {
+            service.removeUsuario(usuarioSelected);
+        }
+        
         return "/restrito/usuarios.faces";
     }
     
@@ -143,7 +151,20 @@ public class UsuarioControl extends BasicControl implements Serializable {
     }
     
     public String editSenha() {
+        getUsuarioSelected().setSenha("");
         return "/restrito/editSenha.faces";
+    }
+    
+    public String updateUsuario() {
+        setFiltrado(null);
+        service.setUsuario(usuarioSelected);
+        return "/restrito/usuarios.faces";
+    }
+    
+    public String updateSenha() {
+        setFiltrado(null);
+        service.setPassword(getUsuarioSelected().getSenha(), getUsuarioSelected().getId());
+        return "/restrito/usuarios.faces";
     }
     
 }
