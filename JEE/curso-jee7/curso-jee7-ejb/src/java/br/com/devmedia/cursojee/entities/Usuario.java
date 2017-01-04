@@ -5,6 +5,7 @@
  */
 package br.com.devmedia.cursojee.entities;
 
+import br.com.devmedia.cursojee.entities.validator.LoginPadrao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -51,6 +52,7 @@ public class Usuario implements Serializable {
     @NotNull
     @Column(nullable = false, length = 255)
     @Length(min = 5, max = 255, message = "O login deve conter o mínimo de 5 caracteres")
+    @LoginPadrao
     private String login;
     @Basic(optional = false)
     @NotNull
