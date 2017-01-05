@@ -10,11 +10,11 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:messages />
+        <h:messages errorClass="msg_error"/>
         <h:form>
             <table>
                 <tr>
-                    <td>Nome</td>
+                    <td>Nome:</td>   
                     <td><h:inputText value="#{usuarioControl.usuarioSelected.nome}" /></td>
                 </tr>
                 <tr>
