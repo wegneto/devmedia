@@ -1,9 +1,12 @@
 package br.com.devmedia.cursojee.control;
 
 import br.com.devmedia.cursojee.entities.Usuario;
+import br.com.devmedia.cursojee.exception.AcessoInvalidoException;
 import br.com.devmedia.cursojee.service.UsuarioService;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -130,7 +133,13 @@ public class UsuarioControl extends BasicControl implements Serializable {
     
     public String createUsuario() {
         setFiltrado(null);
-        service.addUsuario(usuarioSelected);
+        try {
+            service.addUsuario(usuarioSelected);
+        } catch (AcessoInvalidoException ex) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null);
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+            return "/restrito/addUsuario.faces";
+        }
         return "/restrito/usuarios.faces";
     }
     
@@ -157,7 +166,13 @@ public class UsuarioControl extends BasicControl implements Serializable {
     
     public String updateUsuario() {
         setFiltrado(null);
-        service.setUsuario(usuarioSelected);
+        try {
+            service.setUsuario(usuarioSelected);
+        } catch (AcessoInvalidoException ex) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null);
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+            return "/restrito/editUsuario.faces";
+        }
         return "/restrito/usuarios.faces";
     }
     

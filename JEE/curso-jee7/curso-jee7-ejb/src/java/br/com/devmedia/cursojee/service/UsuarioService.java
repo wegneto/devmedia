@@ -1,6 +1,7 @@
 package br.com.devmedia.cursojee.service;
 
 import br.com.devmedia.cursojee.entities.Usuario;
+import br.com.devmedia.cursojee.exception.AcessoInvalidoException;
 import br.com.devmedia.cursojee.service.repositories.UsuarioRepository;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -34,7 +35,10 @@ public class UsuarioService extends BasicService {
     public UsuarioService() {
     }
 
-    public Usuario addUsuario(Usuario usuario) {
+    public Usuario addUsuario(Usuario usuario) throws AcessoInvalidoException {
+        if (!usuario.getAdministrador() && !usuario.getDentista()) {
+            throw new AcessoInvalidoException("O usuário atual não possui um acesso válido.");
+        }
         return usrRepo.addUsuario(usuario);
     }
 
@@ -42,7 +46,10 @@ public class UsuarioService extends BasicService {
         return usrRepo.getUsuario(id);
     }
     
-    public Usuario setUsuario(Usuario usuario) {
+    public Usuario setUsuario(Usuario usuario) throws AcessoInvalidoException {
+        if (!usuario.getAdministrador() && !usuario.getDentista()) {
+            throw new AcessoInvalidoException("O usuário atual não possui um acesso válido.");
+        }
         return usrRepo.setUsuario(usuario);
     }
     
