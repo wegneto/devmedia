@@ -32,45 +32,27 @@
                     </f:facet>
                     #{item.nome}
                 </h:column>
-                <!-- h:column>
-                    <f:facet name="header">
-                        Login
-                    </f:facet>
-                    #{item.login}
-                </h:column>
                 <h:column>
                     <f:facet name="header">
-                        Administrador
+                        Custo
                     </f:facet>
-                    <h:graphicImage rendered="#{item.administrador eq true}" value="/resources/images/checked.png"/> 
-                    <h:graphicImage rendered="#{item.administrador eq false}" value="/resources/images/notchecked.gif"/> 
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Dentista
-                    </f:facet>
-                    <h:graphicImage rendered="#{item.dentista eq true}" value="/resources/images/checked.png"/> 
-                    <h:graphicImage rendered="#{item.dentista eq false}" value="/resources/images/notchecked.gif"/> 
+                    <h:outputText value="#{item.custo}"><f:convertNumber type="currency" /></h:outputText>
                 </h:column>
                 <h:column rendered="#{usuarioControl.loggedUser.administrador}">
                     <f:facet name="header">
                         Ações
                     </f:facet>
-                    <h:commandLink action="#{usuarioControl.editUsuario()}">
+                    <h:commandLink action="#{servicoControl.editServico()}">
                         <h:graphicImage value="/resources/images/update.png"/> 
                         <f:setPropertyActionListener value="#{item}" target="#{usuarioControl.usuarioSelected}" />
                     </h:commandLink>
-                    <h:commandLink action="#{usuarioControl.removeUsuario()}" onclick="return confirm('Confirma a exclusão do usuário?')">
+                    <h:commandLink action="#{servicoControl.removeServico()}" onclick="return confirm('Confirma a exclusão do usuário?')">
                         <h:graphicImage value="/resources/images/remove.png"/> 
                         <f:setPropertyActionListener value="#{item}" target="#{usuarioControl.usuarioSelected}" />
                     </h:commandLink>
-                    <h:commandLink action="#{usuarioControl.editSenha()}">
-                        <h:graphicImage value="/resources/images/senha.png"/>
-                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControl.usuarioSelected}" />
-                    </h:commandLink>
-                </h:column-->
+                </h:column>
             </h:dataTable>
-            <h:commandButton rendered="#{usuarioControl.loggedUser.administrador}" action="#{usuarioControl.addUsuario}" value="Adicionar Usuário"/>
+            <h:commandButton rendered="#{usuarioControl.loggedUser.administrador}" action="#{servicoControl.addServico}" value="Adicionar Serviço"/>
         </h:form>
     </ui:define>
 

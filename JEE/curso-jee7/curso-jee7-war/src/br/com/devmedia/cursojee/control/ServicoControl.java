@@ -19,16 +19,16 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class ServicoControl extends BasicControl {
-    
+
     @EJB
     private ServicoService service;
-    
+
     private String localizar;
-    
+
     private List<Servico> filtrado;
-    
+
     private Servico selected;
-    
+
     public List<Servico> getServicos() {
         return service.getServicos();
     }
@@ -59,10 +59,21 @@ public class ServicoControl extends BasicControl {
     public void setSelected(Servico selected) {
         this.selected = selected;
     }
-    
+
     public String doLocalizar() {
         filtrado = service.getServicoByNome(getLocalizar());
         return "servicos.faces";
     }
-    
+
+    public String addServico() {
+        setSelected(new Servico());
+        return "/restrito/addServico.faces";
+    }
+
+    public String createServico() {
+        setFiltrado(null);
+        service.addServico(selected);
+        return "/restrito/servicos.faces";
+    }
+
 }

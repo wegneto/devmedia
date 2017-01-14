@@ -44,7 +44,7 @@ public class Servico implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
+    @Size(min = 3, max = 255, message = "O nome do serviço deve conter pelo menos 3 caracteres.")
     @Column(nullable = false, length = 255)
     private String nome;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
