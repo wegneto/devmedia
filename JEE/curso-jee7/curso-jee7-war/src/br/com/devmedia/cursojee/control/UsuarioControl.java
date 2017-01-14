@@ -85,8 +85,7 @@ public class UsuarioControl extends BasicControl implements Serializable {
         loggedUser = null;
         loggedUser = service.getUsuarioByLoginPassword(this.userName, this.password);
         if (loggedUser == null) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário ou senha inválidos", "Usuário ou senha inválidos");
-            FacesContext.getCurrentInstance().addMessage(null, fm);
+            createFacesErrorMessage("\"Usuário ou senha inválidos\"");
             return "/login.faces";
         } else {
             return "/restrito/index.faces?faces-redirect=true";

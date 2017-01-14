@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./base.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="pageTitle">
+        Servicos
+    </ui:define>
+
+    <ui:define name="content">
+        <h:messages errorClass="msg_error" />
+        <h:form>
+            <table>
+                <tr>
+                    <td width="15%">Localizar serviço:</td>
+                    <td width="80%"><h:inputText style="width: 100%" value="#{servicoControl.localizar}" /></td>
+                    <td width="5%"><h:commandButton action="#{servicoControl.doLocalizar()}" value="Localizar"/></td>    
+                </tr>
+            </table>
+            <h:dataTable styleClass="tabela_basica" value="#{servicoControl.filtrado}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        Id
+                    </f:facet>
+                    #{item.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Nome
+                    </f:facet>
+                    #{item.nome}
+                </h:column>
+                <!-- h:column>
+                    <f:facet name="header">
+                        Login
+                    </f:facet>
+                    #{item.login}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Administrador
+                    </f:facet>
+                    <h:graphicImage rendered="#{item.administrador eq true}" value="/resources/images/checked.png"/> 
+                    <h:graphicImage rendered="#{item.administrador eq false}" value="/resources/images/notchecked.gif"/> 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Dentista
+                    </f:facet>
+                    <h:graphicImage rendered="#{item.dentista eq true}" value="/resources/images/checked.png"/> 
+                    <h:graphicImage rendered="#{item.dentista eq false}" value="/resources/images/notchecked.gif"/> 
+                </h:column>
+                <h:column rendered="#{usuarioControl.loggedUser.administrador}">
+                    <f:facet name="header">
+                        Ações
+                    </f:facet>
+                    <h:commandLink action="#{usuarioControl.editUsuario()}">
+                        <h:graphicImage value="/resources/images/update.png"/> 
+                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControl.usuarioSelected}" />
+                    </h:commandLink>
+                    <h:commandLink action="#{usuarioControl.removeUsuario()}" onclick="return confirm('Confirma a exclusão do usuário?')">
+                        <h:graphicImage value="/resources/images/remove.png"/> 
+                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControl.usuarioSelected}" />
+                    </h:commandLink>
+                    <h:commandLink action="#{usuarioControl.editSenha()}">
+                        <h:graphicImage value="/resources/images/senha.png"/>
+                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControl.usuarioSelected}" />
+                    </h:commandLink>
+                </h:column-->
+            </h:dataTable>
+            <h:commandButton rendered="#{usuarioControl.loggedUser.administrador}" action="#{usuarioControl.addUsuario}" value="Adicionar Usuário"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
