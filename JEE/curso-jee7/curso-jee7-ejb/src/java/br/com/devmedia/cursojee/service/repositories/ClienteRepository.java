@@ -55,5 +55,11 @@ public class ClienteRepository extends BasicRepository {
         String query = "select p.orcamento.cliente from Parcela p where p.pago = ?1";
         return getList(Cliente.class, query, Boolean.FALSE);
     }
+    
+    public Date getUltimoAtendimento(Integer id) {
+        String query = "select max(o.data) from Orcamento o where o.cliente.id = ?1";
+        Date result = getPojo(Date.class, query, id);
+        return result;
+    }
 
 }

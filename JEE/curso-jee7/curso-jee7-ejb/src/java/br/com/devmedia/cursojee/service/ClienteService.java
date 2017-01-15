@@ -2,6 +2,7 @@ package br.com.devmedia.cursojee.service;
 
 import br.com.devmedia.cursojee.entities.Cliente;
 import br.com.devmedia.cursojee.service.repositories.ClienteRepository;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -57,6 +58,10 @@ public class ClienteService extends BasicService{
     
     public List<Cliente> getClienteParaLigar(int mes, int ano) {
         return repository.getClienteParaLigar(mes, ano);
+    }
+    
+    public Date getUltimoAtendimento(Integer id) {
+        return repository.getUltimoAtendimento(id);
     }
     
 }
