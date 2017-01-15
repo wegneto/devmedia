@@ -75,5 +75,21 @@ public class ServicoControl extends BasicControl {
         service.addServico(selected);
         return "/restrito/servicos.faces";
     }
+    
+    public String removeServico() {
+        filtrado = null;
+        service.removeServico(selected);
+        return "/restrito/servicos.faces";
+    }
+    
+    public String editServico() {
+        return "/restrito/editServico.faces";
+    }
+    
+    public String updateServico() {
+        filtrado = null;
+        service.setServico(selected);
+        return "/restrito/servicos.faces";
+    }
 
 }

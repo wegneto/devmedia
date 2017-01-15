@@ -44,11 +44,11 @@
                     </f:facet>
                     <h:commandLink action="#{servicoControl.editServico()}">
                         <h:graphicImage value="/resources/images/update.png"/> 
-                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControl.usuarioSelected}" />
+                        <f:setPropertyActionListener value="#{item}" target="#{servicoControl.selected}" />
                     </h:commandLink>
-                    <h:commandLink action="#{servicoControl.removeServico()}" onclick="return confirm('Confirma a exclusão do usuário?')">
+                    <h:commandLink action="#{servicoControl.removeServico()}" onclick="return confirm('Confirma a exclusão do serviço?')">
                         <h:graphicImage value="/resources/images/remove.png"/> 
-                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControl.usuarioSelected}" />
+                        <f:setPropertyActionListener value="#{item}" target="#{servicoControl.selected}" />
                     </h:commandLink>
                 </h:column>
             </h:dataTable>
