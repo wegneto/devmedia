@@ -19,7 +19,7 @@
                     <td width="5%"><h:commandButton action="#{servicoControl.doLocalizar()}" value="Localizar"/></td>    
                 </tr>
             </table>
-            <h:dataTable styleClass="tabela_basica" value="#{servicoControl.filtrado}" var="item">
+            <h:dataTable rowClasses="linhaPar,linhaImpar" styleClass="tabela_basica" value="#{servicoControl.filtrado}" var="item">
                 <h:column>
                     <f:facet name="header">
                         Id
