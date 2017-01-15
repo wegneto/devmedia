@@ -5,6 +5,7 @@
  */
 package br.com.devmedia.cursojee.entities;
 
+import br.com.devmedia.cursojee.entities.validator.DescricaoServicoUnica;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -32,6 +33,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 @Table(name = "servicos")
 @XmlRootElement
+@DescricaoServicoUnica
 @NamedQueries({
     @NamedQuery(name = "Servicos.findAll", query = "SELECT s FROM Servico s")})
 public class Servico implements Serializable {

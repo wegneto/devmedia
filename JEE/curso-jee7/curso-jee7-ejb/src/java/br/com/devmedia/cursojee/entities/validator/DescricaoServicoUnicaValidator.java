@@ -7,6 +7,7 @@ package br.com.devmedia.cursojee.entities.validator;
 
 import br.com.devmedia.cursojee.entities.Servico;
 import br.com.devmedia.cursojee.service.ServicoService;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -21,16 +22,27 @@ import javax.validation.ConstraintValidatorContext;
  */
 public class DescricaoServicoUnicaValidator implements ConstraintValidator<DescricaoServicoUnica, Servico> {
 
-    private final ServicoService servicoService = lookupServicoServiceBean();
+    private final ServicoService service = lookupServicoServiceBean();
 
     @Override
     public void initialize(DescricaoServicoUnica constraintAnnotation) {
-        
     }
 
     @Override
     public boolean isValid(Servico value, ConstraintValidatorContext context) {
-        return false;
+        if (value == null) {
+            return true;
+        }
+        
+        List<Servico> serviceList = service.getServicoByNome(value.getNome());
+        
+        for (Servico servico : serviceList) {
+            if (servico.getNome().equalsIgnoreCase(value.getNome()) && !servico.equals(value)) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     private ServicoService lookupServicoServiceBean() {
