@@ -72,6 +72,11 @@ public class ServicoControl extends BasicControl {
 
     public String createServico() {
         setFiltrado(null);
+        
+        if (checkViolations(selected)) {
+            return "/restrito/addServico.faces";
+        }
+        
         service.addServico(selected);
         return "/restrito/servicos.faces";
     }
@@ -88,6 +93,9 @@ public class ServicoControl extends BasicControl {
     
     public String updateServico() {
         filtrado = null;
+        if (checkViolations(selected)) {
+            return "/restrito/editServico.faces";
+        }
         service.setServico(selected);
         return "/restrito/servicos.faces";
     }

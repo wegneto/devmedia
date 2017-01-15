@@ -23,4 +23,18 @@ public abstract class BasicControl implements Serializable {
         return retorno;
     }
     
+    protected boolean checkViolations(Serializable entidade) {
+        Set<ConstraintViolation<Serializable>> retorno = getViolations(entidade);
+        
+        if (retorno.isEmpty()) {
+            return false;
+        }
+        
+        for(ConstraintViolation<Serializable> constraintViolation : retorno) {
+            createFacesErrorMessage(constraintViolation.getMessage());
+        }
+        
+        return true;
+    }
+    
 }
