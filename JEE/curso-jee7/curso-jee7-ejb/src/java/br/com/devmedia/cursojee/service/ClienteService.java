@@ -64,4 +64,8 @@ public class ClienteService extends BasicService{
         return repository.getUltimoAtendimento(id);
     }
     
+    public int getCustomerCount() {
+        return repository.getCustomerCount();
+    }
+    
 }

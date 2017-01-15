@@ -1,6 +1,7 @@
 package br.com.devmedia.cursojee.control;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -11,6 +12,8 @@ import javax.validation.ValidatorFactory;
 
 public abstract class BasicControl implements Serializable {
     
+    private SimpleDateFormat sfd = new SimpleDateFormat("dd/MM/yyyy"); 
+
     public void createFacesErrorMessage(String message) {
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
         FacesContext.getCurrentInstance().addMessage(null, fm);
@@ -35,6 +38,10 @@ public abstract class BasicControl implements Serializable {
         }
         
         return true;
+    }
+    
+    public SimpleDateFormat getSfd() {
+        return sfd;
     }
     
 }

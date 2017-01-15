@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./base.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="pageTitle">
+        Novo Cliente
+    </ui:define>
+
+    <ui:define name="content">
+        <h:messages errorClass="msg_error"/>
+        <h:form>
+            <table>
+                <tr>
+                    <td>Nome</td>
+                    <td><h:inputText value="#{clienteController.selected.nome}" /></td>
+                </tr>
+                <tr>
+                    <td>Idade</td>
+                    <td><h:inputText value="#{clienteController.selected.idade}" /></td>
+                </tr>
+                <tr>
+                    <td>Endereco</td>
+                    <td><h:inputText value="#{clienteController.selected.endereco}" /></td>
+                </tr>
+                <tr>
+                    <td>Estado</td>
+                    <td><h:inputText value="#{clienteController.selected.estado}" /></td>
+                </tr>
+                <tr>
+                    <td>Cidade</td>
+                    <td><h:inputText value="#{clienteController.selected.cidade}" /></td>
+                </tr>
+                <tr>
+                    <td>Complemento</td>
+                    <td><h:inputText value="#{clienteController.selected.complemento}" /></td>
+                </tr>
+                <tr>
+                    <td>Pai</td>
+                    <td><h:inputText value="#{clienteController.selected.nomePai}" /></td>
+                </tr>
+                <tr>
+                    <td>Mãe</td>
+                    <td><h:inputText value="#{clienteController.selected.nomeMae}" /></td>
+                </tr>
+            </table>
+            <h:commandButton action="#{clienteController.createCliente()}" value="Cadastrar"/> <h:commandButton action="clientes.faces" value="Cancelar" immediate="true"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

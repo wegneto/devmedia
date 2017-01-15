@@ -7,13 +7,18 @@ package br.com.devmedia.cursojee.control;
 
 import br.com.devmedia.cursojee.entities.Cliente;
 import br.com.devmedia.cursojee.service.ClienteService;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author wegneto
  */
+@Named
+@SessionScoped
 public class ClienteController extends BasicControl {
     
     @EJB
@@ -33,11 +38,11 @@ public class ClienteController extends BasicControl {
         this.localizar = localizar;
     }
 
-    public List<Cliente> getFiltrado() {
+    public List<Cliente> getClientes() {
         return clientes;
     }
 
-    public void setFiltrado(List<Cliente> filtrado) {
+    public void setClientes(List<Cliente> filtrado) {
         this.clientes = filtrado;
     }
 
@@ -50,13 +55,32 @@ public class ClienteController extends BasicControl {
     }
     
     public String doLocalizar() {
+        cleanCache();
         clientes = service.getClienteByName(localizar);
         return "/restrito/clientes.faces";
     }
     
+    private void cleanCache() {
+        clientes = null;
+        setSelected(new Cliente());
+    }
+    
     public String getUltimoAtendimento(Integer id) {
-        
-        return null;
+        Date data = service.getUltimoAtendimento(id);
+        if (data == null) {
+            return "Sem informação.";
+        } else {
+            return getSfd().format(data);
+        }
+    }
+    
+    public int getCustomerCount() {
+        return service.getCustomerCount();
+    }
+    
+    public String addCliente() {
+        cleanCache();
+        return "/restrito/addCliente.faces";
     }
     
 }

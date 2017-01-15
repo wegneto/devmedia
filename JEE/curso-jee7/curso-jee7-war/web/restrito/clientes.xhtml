@@ -19,7 +19,7 @@
                     <td width="5%"><h:commandButton action="#{clienteController.doLocalizar()}" value="Localizar"/></td>    
                 </tr>
             </table>
-            <h:dataTable styleClass="tabela_basica" value="#{clienteController.filtrado}" var="item">
+            <h:dataTable styleClass="tabela_basica" value="#{clienteController.clientes}" var="item">
                 <h:column>
                     <f:facet name="header">
                         Id
@@ -55,17 +55,13 @@
                     <f:facet name="header">
                         Ações
                     </f:facet>
-                    <h:commandLink action="#{usuarioControl.editUsuario()}">
+                    <h:commandLink action="#{clienteController.editCliente()}">
                         <h:graphicImage value="/resources/images/update.png"/> 
-                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControl.usuarioSelected}" />
+                        <f:setPropertyActionListener value="#{item}" target="#{clienteController.selected}" />
                     </h:commandLink>
-                    <h:commandLink action="#{usuarioControl.removeUsuario()}" onclick="return confirm('Confirma a exclusão do usuário?')">
+                    <h:commandLink action="#{clienteController.removeCliente()}" onclick="return confirm('Confirma a exclusão do usuário?')">
                         <h:graphicImage value="/resources/images/remove.png"/> 
-                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControl.usuarioSelected}" />
-                    </h:commandLink>
-                    <h:commandLink action="#{usuarioControl.editSenha()}">
-                        <h:graphicImage value="/resources/images/senha.png"/>
-                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControl.usuarioSelected}" />
+                        <f:setPropertyActionListener value="#{item}" target="#{clienteController.selected}" />
                     </h:commandLink>
                 </h:column>
             </h:dataTable>
