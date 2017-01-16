@@ -19,7 +19,7 @@ public class ClienteRepository extends BasicRepository {
     public Cliente setCliente(Cliente cliente) {
         return setEntity(cliente);
     }
-
+    
     public Cliente getCliente(int id) {
         return getEntity(Cliente.class, id);
     }

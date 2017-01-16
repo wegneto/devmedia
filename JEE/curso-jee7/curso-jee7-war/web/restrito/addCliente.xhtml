@@ -18,8 +18,8 @@
                     <td><h:inputText value="#{clienteController.selected.nome}" /></td>
                 </tr>
                 <tr>
-                    <td>Idade</td>
-                    <td><h:inputText value="#{clienteController.selected.idade}" /></td>
+                    <td>Data de Nascimento</td>
+                    <td><h:inputText value="#{clienteController.selected.dataNascimento}" /></td>
                 </tr>
                 <tr>
                     <td>Endereco</td>
@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                     <td>Estado</td>
-                    <td><h:inputText value="#{clienteController.selected.estado}" /></td>
+                    <td><h:inputText maxlength="2" value="#{clienteController.selected.estado}" /></td>
                 </tr>
                 <tr>
                     <td>Cidade</td>
@@ -44,6 +44,14 @@
                 <tr>
                     <td>Mãe</td>
                     <td><h:inputText value="#{clienteController.selected.nomeMae}" /></td>
+                </tr>
+                <tr>
+                    <td>Observações</td>
+                    <td><h:inputText value="#{clienteController.selected.observacoes}" /></td>
+                </tr>
+                <tr>
+                    <td>Ocupação</td>
+                    <td><h:inputText value="#{clienteController.selected.ocupacao}" /></td>
                 </tr>
             </table>
             <h:commandButton action="#{clienteController.createCliente()}" value="Cadastrar"/> <h:commandButton action="clientes.faces" value="Cancelar" immediate="true"/>
