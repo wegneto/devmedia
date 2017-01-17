@@ -6,7 +6,9 @@
 package br.com.devmedia.cursojee.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
@@ -20,6 +22,8 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -139,6 +143,25 @@ public class Cliente implements Serializable {
         this.nomePai = nomePai;
         this.nomeMae = nomeMae;
         this.dataNascimento = dataNascimento;
+    }
+    
+    @PrePersist
+    @PreUpdate
+    public void atualizarIdade() {
+        setIdade(getIdade(getDataNascimento()));
+    }
+    
+    private int getIdade(Date nascimento) {
+        Calendar dataNascimento = new GregorianCalendar();
+        dataNascimento.setTime(nascimento);
+        Calendar dataAtual = Calendar.getInstance();
+        int idade = dataAtual.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR);
+        dataNascimento.add(Calendar.YEAR, idade);
+        if (dataAtual.before(dataNascimento)) {
+            idade--;
+        }
+        
+        return idade;
     }
     
     public void addOrcamento(Orcamento orcamento) {

@@ -35,28 +35,13 @@ public class ClienteService extends BasicService {
     }
 
     public Cliente addCliente(Cliente cliente) {
-        cliente.setIdade(getIdade(cliente.getDataNascimento()));
         return repository.addCliente(cliente);
     }
 
     public Cliente setCliente(Cliente cliente) {
-        cliente.setIdade(getIdade(cliente.getDataNascimento()));
         return repository.setCliente(cliente);
     }
     
-    private int getIdade(Date nascimento) {
-        Calendar dataNascimento = new GregorianCalendar();
-        dataNascimento.setTime(nascimento);
-        Calendar dataAtual = Calendar.getInstance();
-        int idade = dataAtual.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR);
-        dataNascimento.add(Calendar.YEAR, idade);
-        if (dataAtual.before(dataNascimento)) {
-            idade--;
-        }
-        
-        return idade;
-    }
-
     public void removeCliente(Cliente cliente) {
         repository.removeCliente(cliente);
     }
