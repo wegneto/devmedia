@@ -12,48 +12,50 @@
     <ui:define name="content">
         <h:messages errorClass="msg_error"/>
         <h:form>
-            <table>
-                <tr>
-                    <td>Nome</td>
-                    <td><h:inputText value="#{clienteController.selected.nome}" /></td>
-                </tr>
-                <tr>
-                    <td>Data de Nascimento</td>
-                    <td><h:inputText value="#{clienteController.selected.dataNascimento}" /></td>
-                </tr>
-                <tr>
-                    <td>Endereco</td>
-                    <td><h:inputText value="#{clienteController.selected.endereco}" /></td>
-                </tr>
-                <tr>
-                    <td>Estado</td>
-                    <td><h:inputText maxlength="2" value="#{clienteController.selected.estado}" /></td>
-                </tr>
-                <tr>
-                    <td>Cidade</td>
-                    <td><h:inputText value="#{clienteController.selected.cidade}" /></td>
-                </tr>
-                <tr>
-                    <td>Complemento</td>
-                    <td><h:inputText value="#{clienteController.selected.complemento}" /></td>
-                </tr>
-                <tr>
-                    <td>Pai</td>
-                    <td><h:inputText value="#{clienteController.selected.nomePai}" /></td>
-                </tr>
-                <tr>
-                    <td>Mãe</td>
-                    <td><h:inputText value="#{clienteController.selected.nomeMae}" /></td>
-                </tr>
-                <tr>
-                    <td>Observações</td>
-                    <td><h:inputText value="#{clienteController.selected.observacoes}" /></td>
-                </tr>
-                <tr>
-                    <td>Ocupação</td>
-                    <td><h:inputText value="#{clienteController.selected.ocupacao}" /></td>
-                </tr>
-            </table>
+            <f:validateBean>
+                <table>
+                    <tr>
+                        <td>Nome</td>
+                        <td><h:inputText value="#{clienteController.selected.nome}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Data de Nascimento</td>
+                        <td><h:inputText value="#{clienteController.selected.dataNascimento}"><f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText></td>
+                    </tr>
+                    <tr>
+                        <td>Endereco</td>
+                        <td><h:inputText value="#{clienteController.selected.endereco}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Estado</td>
+                        <td><h:inputText maxlength="2" value="#{clienteController.selected.estado}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Cidade</td>
+                        <td><h:inputText value="#{clienteController.selected.cidade}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Complemento</td>
+                        <td><h:inputText value="#{clienteController.selected.complemento}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Pai</td>
+                        <td><h:inputText value="#{clienteController.selected.nomePai}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Mãe</td>
+                        <td><h:inputText value="#{clienteController.selected.nomeMae}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Observações</td>
+                        <td><h:inputText value="#{clienteController.selected.observacoes}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Ocupação</td>
+                        <td><h:inputText value="#{clienteController.selected.ocupacao}" /></td>
+                    </tr>
+                </table>
+            </f:validateBean>
             <h:commandButton action="#{clienteController.createCliente()}" value="Cadastrar"/> <h:commandButton action="clientes.faces" value="Cancelar" immediate="true"/>
         </h:form>
     </ui:define>

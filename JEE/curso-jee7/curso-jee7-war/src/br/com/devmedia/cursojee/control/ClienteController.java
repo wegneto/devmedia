@@ -84,7 +84,11 @@ public class ClienteController extends BasicControl {
     }
     
     public String createCliente() {
-        return null;
+        if (checkViolations(selected)) {
+            
+        }
+        service.addCliente(selected);
+        return "/restrito/clientes.faces";
     }
     
 }

@@ -48,7 +48,7 @@ public class Cliente implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
+    @Size(min = 3, max = 255, message = "Nome deve ter no mínimo 3 caracteres.")
     @Column(nullable = false, length = 255)
     private String nome;
     @Basic(optional = false)
