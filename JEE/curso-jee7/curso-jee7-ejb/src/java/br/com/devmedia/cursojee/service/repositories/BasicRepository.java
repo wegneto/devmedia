@@ -16,6 +16,12 @@ public abstract class BasicRepository {
     protected EntityManager getEntityManager() {
         return entityManager;
     }
+    
+    protected <T> T refreshEntity(Class<T> classToCast, Object entity) {
+        entity = getEntityManager().merge(entity);
+        getEntityManager().refresh(entity);
+        return (T) entity;
+    }
 
     protected <T> T addEntity(Object entity) {
         getEntityManager().persist(entity);

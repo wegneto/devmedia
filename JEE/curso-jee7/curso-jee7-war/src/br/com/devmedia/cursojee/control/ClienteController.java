@@ -83,11 +83,25 @@ public class ClienteController extends BasicControl {
         return "/restrito/addCliente.faces";
     }
     
+    public String editCliente() {
+        return "/restrito/editCliente.faces";
+    }
+    
     public String createCliente() {
         if (checkViolations(selected)) {
             return "/restrito/addCliente.faces";
         }
         service.addCliente(selected);
+        doLocalizar();
+        
+        return "/restrito/clientes.faces";
+    }
+    
+    public String updateCliente() {
+        if (checkViolations(selected)) {
+            return "/restrito/editCliente.faces";
+        }
+        service.setCliente(selected);
         doLocalizar();
         
         return "/restrito/clientes.faces";
