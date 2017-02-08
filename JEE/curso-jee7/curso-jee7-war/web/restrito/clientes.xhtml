@@ -55,6 +55,9 @@
                     <f:facet name="header">
                         Ações
                     </f:facet>
+                    <h:commandLink action="#{orcamentoController.atenderCliente(clienteController.selected)}">
+                        <h:graphicImage value="/resources/images/atender.png"/> 
+                    </h:commandLink>
                     <h:commandLink action="#{clienteController.editCliente()}">
                         <h:graphicImage value="/resources/images/update.png"/> 
                         <f:setPropertyActionListener value="#{item}" target="#{clienteController.selected}" />

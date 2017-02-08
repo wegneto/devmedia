@@ -13,10 +13,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-/**
- *
- * @author wegneto
- */
 @Named
 @SessionScoped
 public class ClienteController extends BasicControl {
@@ -102,6 +98,13 @@ public class ClienteController extends BasicControl {
             return "/restrito/editCliente.faces";
         }
         service.setCliente(selected);
+        doLocalizar();
+        
+        return "/restrito/clientes.faces";
+    }
+    
+    public String removeCliente() {
+        service.removeCliente(selected);
         doLocalizar();
         
         return "/restrito/clientes.faces";
