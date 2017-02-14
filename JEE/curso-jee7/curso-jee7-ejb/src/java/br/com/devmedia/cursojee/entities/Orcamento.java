@@ -25,6 +25,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -90,8 +91,8 @@ public class Orcamento implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
     private List<Parcela> parcelas = new LinkedList<>();
     @PodamExclude
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
-    private List<Anaminese> anamineses = new LinkedList<>();
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "orcamento")
+    private Anaminese anaminese;
 
     public Orcamento() {
     }
@@ -199,12 +200,12 @@ public class Orcamento implements Serializable {
     }
 
     @XmlTransient
-    public List<Anaminese> getAnamineses() {
-        return anamineses;
+    public Anaminese getAnaminese() {
+        return anaminese;
     }
 
-    public void setAnamineses(List<Anaminese> anamineses) {
-        this.anamineses = anamineses;
+    public void setAnaminese(Anaminese anaminese) {
+        this.anaminese = anaminese;
     }
 
     @Override
@@ -235,11 +236,6 @@ public class Orcamento implements Serializable {
     public void addServico(OrcamentoServico orcamentoServico) {
         orcamentoServico.setOrcamento(this);
         orcamentoServicoList.add(orcamentoServico);
-    }
-
-    public void addAnaminese(Anaminese anaminese) {
-        anaminese.setOrcamento(this);
-        getAnamineses().add(anaminese);
     }
 
     public void addParcela(Parcela parcela) {
