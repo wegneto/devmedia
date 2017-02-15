@@ -6,6 +6,7 @@ import br.com.devmedia.cursojee.service.AnamineseService;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
@@ -20,6 +21,9 @@ public class AnamineseController extends BasicControl {
     private List<Anaminese> anamineses;
     
     private Cliente cliente;
+    
+    @Inject
+    private OrcamentoController orcamentoController;
 
     public AnamineseService getService() {
         return service;
@@ -65,7 +69,10 @@ public class AnamineseController extends BasicControl {
     }
     
     public String create() {
-        return "";
+        selected.setCliente(cliente);
+        service.addAnaminese(selected);
+        cleanCache();
+        return "/restrito/orcamento.faces";
     }
 
 }

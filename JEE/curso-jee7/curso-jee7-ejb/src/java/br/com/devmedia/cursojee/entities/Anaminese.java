@@ -81,7 +81,7 @@ public class Anaminese implements Serializable {
     @PodamExclude
     private Cliente cliente;
     @JoinColumn(name = "id_orcamento", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @PodamExclude
     private Orcamento orcamento;
 

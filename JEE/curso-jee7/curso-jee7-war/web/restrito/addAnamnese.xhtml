@@ -44,15 +44,15 @@
                 </tr>
                 <tr>
                     <td>Cirurgia recente:</td>
-                    <td><h:selectBooleanCheckbox id="cirurgia" value="#{anamineseController.selected.cirurgia}" />&nbsp;Especifique:&nbsp;<h:inputText id="cirurgiaDescricao" value="#{anamineseController.selected.cirurgiaDescricao}" /></td>
+                    <td><h:selectBooleanCheckbox id="cirurgia" value="#{anamineseController.selected.cirurgia}" onchange="javascript:enableDisable(this, 'frmAnamnese:cirurgiaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="cirurgiaDescricao" value="#{anamineseController.selected.cirurgiaDescricao}" /></td>
                 </tr>
                 <tr>
                     <td>Utiliza medicação contínua:</td>
-                    <td><h:selectBooleanCheckbox id="medicacao" value="#{anamineseController.selected.medicacao}" />&nbsp;Especifique:&nbsp;<h:inputText id="medicacaoDescricao" value="#{anamineseController.selected.medicacaoDescricao}" /></td>
+                    <td><h:selectBooleanCheckbox id="medicacao" value="#{anamineseController.selected.medicacao}" onchange="javascript:enableDisable(this, 'frmAnamnese:medicacaoDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="medicacaoDescricao" value="#{anamineseController.selected.medicacaoDescricao}" /></td>
                 </tr>
                 <tr>
                     <td>Possui alguma alergia:</td>
-                    <td><h:selectBooleanCheckbox id="alergia" value="#{anamineseController.selected.alergia}" />&nbsp;Especifique:&nbsp;<h:inputText id="alergiaDescricao" value="#{anamineseController.selected.alergiaDescricao}" /></td>
+                    <td><h:selectBooleanCheckbox id="alergia" value="#{anamineseController.selected.alergia}" onchange="javascript:enableDisable(this, 'frmAnamnese:alergiaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="alergiaDescricao" value="#{anamineseController.selected.alergiaDescricao}" /></td>
                 </tr>
                 <tr>
                     <td>Observações:</td>
