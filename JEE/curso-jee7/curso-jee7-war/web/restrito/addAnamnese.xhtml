@@ -38,6 +38,10 @@
                     <td>Possui alguma alergia:</td>
                     <td><h:selectBooleanCheckbox value="#{anamineseController.selected.alergia}" />&nbsp;Especifique:&nbsp;<h:inputText value="#{anamineseController.selected.alergiaDescricao}" /></td>
                 </tr>
+                <tr>
+                    <td>Observações:</td>
+                    <td><h:inputTextarea value="#{anamineseController.selected.observacoes}" /></td>
+                </tr>
             </table>
             <h:commandButton action="#{anamineseController.create()}" value="Cadastrar"/> <h:commandButton action="servicos.faces" value="Cancelar" immediate="true"/>
         </h:form>
