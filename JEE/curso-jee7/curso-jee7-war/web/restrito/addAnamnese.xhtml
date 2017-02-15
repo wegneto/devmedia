@@ -10,9 +10,25 @@
     </ui:define>
 
     <ui:define name="content">
+        <script> 
+            $(document).ready(function() {
+               $('input[type=text]').attr("disabled", true); 
+            });
+            
+            function enableDisable(campoChk, campoTxt) {
+                if (campoChk.checked){
+                    $('input[id=\"'+campoTxt+'\"]').attr("disabled", false); 
+                } else {
+                    $('input[id=\"'+campoTxt+'\"]').attr("disabled", true); 
+                }
+                return true;
+            }
+        </script>
+        
+        
         <h3>Nova Anamnese para #{anamineseController.cliente.nome}</h3>
         <h:messages errorClass="msg_error"/>
-        <h:form>
+        <h:form id="frmAnamnese">
             <table>
                 <tr>
                     <td>Fumante:</td>
@@ -24,19 +40,19 @@
                 </tr>
                 <tr>
                     <td>Doença hereditária:</td>
-                    <td><h:selectBooleanCheckbox value="#{anamineseController.selected.doenca}" />&nbsp;Especifique:&nbsp;<h:inputText value="#{anamineseController.selected.doencaDescricao}" /></td>
+                    <td><h:selectBooleanCheckbox id="doenca" value="#{anamineseController.selected.doenca}" onchange="javascript:enableDisable(this, 'frmAnamnese:doencaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="doencaDescricao" value="#{anamineseController.selected.doencaDescricao}" /></td>
                 </tr>
                 <tr>
                     <td>Cirurgia recente:</td>
-                    <td><h:selectBooleanCheckbox value="#{anamineseController.selected.cirurgia}" />&nbsp;Especifique:&nbsp;<h:inputText value="#{anamineseController.selected.cirurgiaDescricao}" /></td>
+                    <td><h:selectBooleanCheckbox id="cirurgia" value="#{anamineseController.selected.cirurgia}" />&nbsp;Especifique:&nbsp;<h:inputText id="cirurgiaDescricao" value="#{anamineseController.selected.cirurgiaDescricao}" /></td>
                 </tr>
                 <tr>
                     <td>Utiliza medicação contínua:</td>
-                    <td><h:selectBooleanCheckbox value="#{anamineseController.selected.medicacao}" />&nbsp;Especifique:&nbsp;<h:inputText value="#{anamineseController.selected.medicacaoDescricao}" /></td>
+                    <td><h:selectBooleanCheckbox id="medicacao" value="#{anamineseController.selected.medicacao}" />&nbsp;Especifique:&nbsp;<h:inputText id="medicacaoDescricao" value="#{anamineseController.selected.medicacaoDescricao}" /></td>
                 </tr>
                 <tr>
                     <td>Possui alguma alergia:</td>
-                    <td><h:selectBooleanCheckbox value="#{anamineseController.selected.alergia}" />&nbsp;Especifique:&nbsp;<h:inputText value="#{anamineseController.selected.alergiaDescricao}" /></td>
+                    <td><h:selectBooleanCheckbox id="alergia" value="#{anamineseController.selected.alergia}" />&nbsp;Especifique:&nbsp;<h:inputText id="alergiaDescricao" value="#{anamineseController.selected.alergiaDescricao}" /></td>
                 </tr>
                 <tr>
                     <td>Observações:</td>
