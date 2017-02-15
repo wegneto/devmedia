@@ -60,7 +60,7 @@
                         <h:graphicImage value="/resources/images/update.png"/> 
                         <f:setPropertyActionListener value="#{item}" target="#{clienteController.selected}" />
                     </h:commandLink>
-                    <h:commandLink action="#{clienteController.removeCliente()}" onclick="return confirm('Confirma a exclusão do usuário?')">
+                    <h:commandLink action="#{clienteController.removeCliente()}" onclick="return confirm('Confirma a exclusão do orçamento?')">
                         <h:graphicImage value="/resources/images/remove.png"/> 
                         <f:setPropertyActionListener value="#{item}" target="#{clienteController.selected}" />
                     </h:commandLink>
@@ -97,19 +97,23 @@
                     <f:facet name="header">
                         Ações
                     </f:facet>
-                    <h:commandLink action="#{clienteController.editCliente()}">
-                        <h:graphicImage value="/resources/images/update.png"/> 
-                        <f:setPropertyActionListener value="#{item}" target="#{clienteController.selected}" />
+                    <h:commandLink title="Utilizar Anamnese" action="#{anamineseController.utilizarAnamese()}">
+                        <h:graphicImage value="/resources/images/ficha.png"/> 
+                        <f:setPropertyActionListener value="#{item}" target="#{anamineseController.selected}" />
                     </h:commandLink>
-                    <h:commandLink action="#{clienteController.removeCliente()}" onclick="return confirm('Confirma a exclusão do usuário?')">
+                    <h:commandLink title="Alterar Anamnese" action="#{anamineseController.edit()}">
+                        <h:graphicImage value="/resources/images/update.png"/> 
+                        <f:setPropertyActionListener value="#{item}" target="#{anamineseController.selected}" />
+                    </h:commandLink>
+                    <h:commandLink title="Excluir Anamnese" action="#{anamineseController.remove()}" onclick="return confirm('Confirma a exclusão da anamnese?')">
                         <h:graphicImage value="/resources/images/remove.png"/> 
-                        <f:setPropertyActionListener value="#{item}" target="#{clienteController.selected}" />
+                        <f:setPropertyActionListener value="#{item}" target="#{anamineseController.selected}" />
                     </h:commandLink>
                 </h:column>
             </h:dataTable>
             <br />
             <br />
-            <h:commandButton action="#{anamineseController.addAnaminese}" value="Adicionar nova Anaminese"/>
+            <h:commandButton action="#{anamineseController.add()}" value="Adicionar nova Anaminese"/>
         </h:form>
     </ui:define>
 

@@ -55,7 +55,17 @@ public class AnamineseController extends BasicControl {
     
     public void cleanCache() {
         setSelected(new Anaminese());
+        getSelected().setCliente(getCliente());
         anamineses = service.getAnaminesesByCliente(getCliente());
+    }
+    
+    public String add() {
+        cleanCache();
+        return "/restrito/addAnamnese.faces";
+    }
+    
+    public String create() {
+        return "";
     }
 
 }
