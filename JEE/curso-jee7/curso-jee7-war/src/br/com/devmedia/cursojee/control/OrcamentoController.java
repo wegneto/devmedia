@@ -7,6 +7,7 @@ import br.com.devmedia.cursojee.service.OrcamentoService;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
@@ -15,6 +16,9 @@ public class OrcamentoController extends BasicControl {
     
     @EJB
     private OrcamentoService service;
+    
+    @Inject
+    private AnamineseController anamineseController;
     
     private Orcamento selected;
     
@@ -56,6 +60,8 @@ public class OrcamentoController extends BasicControl {
     
     public String atenderCliente(Cliente cliente) {
        setCliente(cliente);
+       anamineseController.setCliente(cliente);
+       anamineseController.cleanCache();
        cleanCache();
        
        return "/restrito/orcamento.faces";

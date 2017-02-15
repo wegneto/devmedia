@@ -70,8 +70,46 @@
             <br/>
             <h3>Lista de Anamneses</h3>
             <br />
-            
-            <h:commandButton rendered="#{usuarioControl.loggedUser.administrador}" action="#{clienteController.addCliente}" value="Adicionar Cliente"/>
+            <c:if test="#{anamineseController.anamineses.size() eq 0}">
+                Não existem anamineses cadastradas.
+            </c:if>
+            <h:dataTable styleClass="tabela_basica" value="#{anamineseController.anamineses}" rendered="#{anamineseController.anamineses.size() ne 0}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        Data do Orçamento
+                    </f:facet>
+                    <h:outputText value="#{item.orcamento.data}"><f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Dentista
+                    </f:facet>
+                    #{item.orcamento.dentista.nome}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Observações
+                    </f:facet>
+                    #{item.observacoes}
+                </h:column>
+                
+                <h:column rendered="#{usuarioControl.loggedUser.administrador}">
+                    <f:facet name="header">
+                        Ações
+                    </f:facet>
+                    <h:commandLink action="#{clienteController.editCliente()}">
+                        <h:graphicImage value="/resources/images/update.png"/> 
+                        <f:setPropertyActionListener value="#{item}" target="#{clienteController.selected}" />
+                    </h:commandLink>
+                    <h:commandLink action="#{clienteController.removeCliente()}" onclick="return confirm('Confirma a exclusão do usuário?')">
+                        <h:graphicImage value="/resources/images/remove.png"/> 
+                        <f:setPropertyActionListener value="#{item}" target="#{clienteController.selected}" />
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <br />
+            <br />
+            <h:commandButton action="#{anamineseController.addAnaminese}" value="Adicionar nova Anaminese"/>
         </h:form>
     </ui:define>
 
