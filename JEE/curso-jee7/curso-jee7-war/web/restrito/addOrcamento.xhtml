@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./base.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="pageTitle">
+        Novo Orçamento para #{orcamentoController.cliente.nome}
+    </ui:define>
+
+    <ui:define name="content">
+        <script> 
+            $(document).ready(function() {
+            });
+        </script>
+        
+        
+        <h3>Novo Orçamento para #{orcamentoController.cliente.nome}</h3>
+        <h4>Anamnese:</h4>
+        <h:messages errorClass="msg_error"/>
+        <h:form id="frmAnamnese">
+            <table>
+                <tr>
+                    <td>Fumante:</td>
+                    <td><h:selectBooleanCheckbox disabled="true" value="#{anamineseControllers.elected.fuma}" /></td>
+                </tr>
+                <tr>
+                    <td>Pratica exercício:</td>
+                    <td><h:selectBooleanCheckbox disabled="true" value="#{anamineseController.selected.exercicio}" /></td>
+                </tr>
+                <tr>
+                    <td>Doença hereditária:</td>
+                    <td><h:selectBooleanCheckbox id="doenca" disabled="true" value="#{anamineseController.selected.doenca}" onchange="javascript:enableDisable(this, 'frmAnamnese:doencaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="doencaDescricao" disabled="true" value="#{anamineseController.selected.doencaDescricao}" /></td>
+                </tr>
+                <tr>
+                    <td>Cirurgia recente:</td>
+                    <td><h:selectBooleanCheckbox id="cirurgia" disabled="true" value="#{anamineseController.selected.cirurgia}" onchange="javascript:enableDisable(this, 'frmAnamnese:cirurgiaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="cirurgiaDescricao" disabled="true" value="#{anamineseController.selected.cirurgiaDescricao}" /></td>
+                </tr>
+                <tr>
+                    <td>Utiliza medicação contínua:</td>
+                    <td><h:selectBooleanCheckbox id="medicacao" disabled="true" value="#{anamineseController.selected.medicacao}" onchange="javascript:enableDisable(this, 'frmAnamnese:medicacaoDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="medicacaoDescricao" disabled="true" value="#{anamineseController.selected.medicacaoDescricao}" /></td>
+                </tr>
+                <tr>
+                    <td>Possui alguma alergia:</td>
+                    <td><h:selectBooleanCheckbox id="alergia" disabled="true" value="#{anamineseController.selected.alergia}" onchange="javascript:enableDisable(this, 'frmAnamnese:alergiaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="alergiaDescricao" disabled="true" value="#{anamineseController.selected.alergiaDescricao}" /></td>
+                </tr>
+                <tr>
+                    <td>Observações:</td>
+                    <td><h:inputTextarea disabled="true" value="#{anamineseController.selected.observacoes}" /></td>
+                </tr>
+            </table>
+            <h:commandButton action="#{anamineseController.create()}" value="Cadastrar"/> <h:commandButton action="orcamento.faces" value="Cancelar" immediate="true"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

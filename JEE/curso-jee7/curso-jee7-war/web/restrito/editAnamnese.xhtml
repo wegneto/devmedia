@@ -6,7 +6,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="pageTitle">
-        Nova Anamnese para #{anamineseController.cliente.nome}
+        Editando Anamnese para #{anamineseController.cliente.nome}
     </ui:define>
 
     <ui:define name="content">
@@ -26,7 +26,7 @@
         </script>
         
         
-        <h3>Nova Anamnese para #{anamineseController.cliente.nome}</h3>
+        <h3>Editando Anamnese para #{anamineseController.cliente.nome}</h3>
         <h:messages errorClass="msg_error"/>
         <h:form id="frmAnamnese">
             <table>
@@ -59,7 +59,7 @@
                     <td><h:inputTextarea value="#{anamineseController.selected.observacoes}" /></td>
                 </tr>
             </table>
-            <h:commandButton action="#{anamineseController.create()}" value="Cadastrar"/> <h:commandButton action="orcamento.faces" value="Cancelar" immediate="true"/>
+            <h:commandButton action="#{anamineseController.update()}" value="Alterar"/> <h:commandButton action="orcamentos.faces" value="Cancelar" immediate="true"/>
         </h:form>
     </ui:define>
 

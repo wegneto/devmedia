@@ -68,9 +68,19 @@ public class AnamineseController extends BasicControl {
         return "/restrito/addAnamnese.faces";
     }
     
+    public String edit() {
+        return "/restrito/editAnamnese.faces";
+    }
+    
     public String create() {
         selected.setCliente(cliente);
         service.addAnaminese(selected);
+        cleanCache();
+        return "/restrito/orcamento.faces";
+    }
+    
+    public String update() {
+        service.setAnaminese(selected);
         cleanCache();
         return "/restrito/orcamento.faces";
     }

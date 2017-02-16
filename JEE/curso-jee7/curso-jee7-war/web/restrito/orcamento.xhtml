@@ -97,7 +97,7 @@
                     <f:facet name="header">
                         Ações
                     </f:facet>
-                    <h:commandLink title="Utilizar Anamnese" action="#{anamineseController.utilizarAnamese()}">
+                    <h:commandLink title="Utilizar Anamnese" action="#{orcamentoController.criarOrcamento(item)}">
                         <h:graphicImage value="/resources/images/ficha.png"/> 
                         <f:setPropertyActionListener value="#{item}" target="#{anamineseController.selected}" />
                     </h:commandLink>

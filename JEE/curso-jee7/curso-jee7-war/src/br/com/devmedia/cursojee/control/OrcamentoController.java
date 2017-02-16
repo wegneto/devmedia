@@ -1,5 +1,6 @@
 package br.com.devmedia.cursojee.control;
 
+import br.com.devmedia.cursojee.entities.Anaminese;
 import br.com.devmedia.cursojee.entities.Cliente;
 import br.com.devmedia.cursojee.entities.Orcamento;
 import br.com.devmedia.cursojee.entities.OrcamentoServico;
@@ -78,12 +79,18 @@ public class OrcamentoController extends BasicControl {
         
         return sb.toString();
     }
-    
 
     private void cleanCache() {
         setSelected(new Orcamento());
         getSelected().setCliente(getCliente());
         setOrcamentos(service.getOrcamentos(getCliente().getId()));
+    }
+    
+    public String criarOrcamento(Anaminese anaminese) {
+        cleanCache();
+        getSelected().setAnaminese(anaminese);
+        anaminese.setOrcamento(getSelected());
+        return "/restrito/addOrcamento.faces";
     }
     
 }
