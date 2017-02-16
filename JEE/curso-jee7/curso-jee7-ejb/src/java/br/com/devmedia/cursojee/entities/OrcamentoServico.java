@@ -45,7 +45,7 @@ public class OrcamentoServico implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false, precision = 16, scale = 2)
-    private BigDecimal custo;
+    private BigDecimal custo = BigDecimal.ZERO;
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false)

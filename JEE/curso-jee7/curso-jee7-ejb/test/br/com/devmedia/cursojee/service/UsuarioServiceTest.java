@@ -1,6 +1,7 @@
 package br.com.devmedia.cursojee.service;
 
 import br.com.devmedia.cursojee.entities.Usuario;
+import br.com.devmedia.cursojee.exception.AcessoInvalidoException;
 import java.security.MessageDigest;
 import java.util.LinkedList;
 import java.util.List;
@@ -105,7 +106,7 @@ public class UsuarioServiceTest {
     }
 
     @Test
-    public void testSetUsuario() {
+    public void testSetUsuario() throws AcessoInvalidoException {
         Usuario usuario = usuarioC;
         Usuario expResult = usuarioC;
         usuario.setNome("Novo nome " + new Random().nextInt());
