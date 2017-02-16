@@ -18,41 +18,42 @@
 
         <h3>Novo Orçamento para #{orcamentoController.cliente.nome}</h3>
         <h4>Anamnese:</h4>
-        <h:messages errorClass="msg_error"/>
+        <h:form id="frmAddOrcamento">
+            <h:messages errorClass="msg_error"/>
 
-        <table>
-            <tr>
-                <td>Fumante:</td>
-                <td><h:selectBooleanCheckbox disabled="true" value="#{anamineseController.selected.fuma}" /></td>
-            </tr>
-            <tr>
-                <td>Pratica exercício:</td>
-                <td><h:selectBooleanCheckbox disabled="true" value="#{anamineseController.selected.exercicio}" /></td>
-            </tr>
-            <tr>
-                <td>Doença hereditária:</td>
-                <td><h:selectBooleanCheckbox id="doenca" disabled="true" value="#{anamineseController.selected.doenca}" onchange="javascript:enableDisable(this, 'frmAnamnese:doencaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="doencaDescricao" disabled="true" value="#{anamineseController.selected.doencaDescricao}" /></td>
-            </tr>
-            <tr>
-                <td>Cirurgia recente:</td>
-                <td><h:selectBooleanCheckbox id="cirurgia" disabled="true" value="#{anamineseController.selected.cirurgia}" onchange="javascript:enableDisable(this, 'frmAnamnese:cirurgiaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="cirurgiaDescricao" disabled="true" value="#{anamineseController.selected.cirurgiaDescricao}" /></td>
-            </tr>
-            <tr>
-                <td>Utiliza medicação contínua:</td>
-                <td><h:selectBooleanCheckbox id="medicacao" disabled="true" value="#{anamineseController.selected.medicacao}" onchange="javascript:enableDisable(this, 'frmAnamnese:medicacaoDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="medicacaoDescricao" disabled="true" value="#{anamineseController.selected.medicacaoDescricao}" /></td>
-            </tr>
-            <tr>
-                <td>Possui alguma alergia:</td>
-                <td><h:selectBooleanCheckbox id="alergia" disabled="true" value="#{anamineseController.selected.alergia}" onchange="javascript:enableDisable(this, 'frmAnamnese:alergiaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="alergiaDescricao" disabled="true" value="#{anamineseController.selected.alergiaDescricao}" /></td>
-            </tr>
-            <tr>
-                <td>Observações:</td>
-                <td><h:inputTextarea disabled="true" value="#{anamineseController.selected.observacoes}" /></td>
-            </tr>
-        </table>
-        <h3>Itens do Orçamento para #{orcamentoController.cliente.nome}</h3>
-        <h:form id="frmAddOrcamento">     
-            <h:dataTable styleClass="tabela_basica" value="#{orcamentoController.selected.orcamentoServicoList}" rendered="#{orcamentoController.selected.orcamentoServicoList.size() eq 0}" var="item">
+            <table>
+                <tr>
+                    <td>Fumante:</td>
+                    <td><h:selectBooleanCheckbox disabled="true" value="#{anamineseController.selected.fuma}" /></td>
+                </tr>
+                <tr>
+                    <td>Pratica exercício:</td>
+                    <td><h:selectBooleanCheckbox disabled="true" value="#{anamineseController.selected.exercicio}" /></td>
+                </tr>
+                <tr>
+                    <td>Doença hereditária:</td>
+                    <td><h:selectBooleanCheckbox id="doenca" disabled="true" value="#{anamineseController.selected.doenca}" onchange="javascript:enableDisable(this, 'frmAnamnese:doencaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="doencaDescricao" disabled="true" value="#{anamineseController.selected.doencaDescricao}" /></td>
+                </tr>
+                <tr>
+                    <td>Cirurgia recente:</td>
+                    <td><h:selectBooleanCheckbox id="cirurgia" disabled="true" value="#{anamineseController.selected.cirurgia}" onchange="javascript:enableDisable(this, 'frmAnamnese:cirurgiaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="cirurgiaDescricao" disabled="true" value="#{anamineseController.selected.cirurgiaDescricao}" /></td>
+                </tr>
+                <tr>
+                    <td>Utiliza medicação contínua:</td>
+                    <td><h:selectBooleanCheckbox id="medicacao" disabled="true" value="#{anamineseController.selected.medicacao}" onchange="javascript:enableDisable(this, 'frmAnamnese:medicacaoDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="medicacaoDescricao" disabled="true" value="#{anamineseController.selected.medicacaoDescricao}" /></td>
+                </tr>
+                <tr>
+                    <td>Possui alguma alergia:</td>
+                    <td><h:selectBooleanCheckbox id="alergia" disabled="true" value="#{anamineseController.selected.alergia}" onchange="javascript:enableDisable(this, 'frmAnamnese:alergiaDescricao')"/>&nbsp;Especifique:&nbsp;<h:inputText id="alergiaDescricao" disabled="true" value="#{anamineseController.selected.alergiaDescricao}" /></td>
+                </tr>
+                <tr>
+                    <td>Observações:</td>
+                    <td><h:inputTextarea disabled="true" value="#{anamineseController.selected.observacoes}" /></td>
+                </tr>
+            </table>
+            <h3>Itens do Orçamento para #{orcamentoController.cliente.nome}</h3>
+
+            <h:dataTable styleClass="tabela_basica" value="#{orcamentoController.selected.orcamentoServicoList}" rendered="#{orcamentoController.selected.orcamentoServicoList.size() ne 0}" var="item">
                 <h:column>
                     <f:facet name="header">
                         Serviço
@@ -76,19 +77,27 @@
             <table>
                 <tr>
                     <td>Dentista:</td>
-                    <td><h:inputText value="#{orcamentoController.selected.dentista}" /></td>
+                    <td>
+                        <h:selectOneMenu value="#{orcamentoController.selected.dentista}">
+                            <f:selectItems var="dentista" value="#{orcamentoController.dentistas}" itemLabel="#{dentista.nome}" itemValue="#{dentista}" itemDisabled="#{dentista.nome}" />
+                        </h:selectOneMenu>
+                    </td>
                 </tr>
                 <tr>
                     <td>Total:</td>
-                    <td><h:inputText value="#{orcamentoController.selected.total}" /></td>
+                    <td><h:outputText value="#{orcamentoController.selected.total}"><f:convertNumber type="currency"/></h:outputText></td>
                 </tr>
                 <tr>
                     <td>Forma de pagamento:</td>
-                    <td><h:inputText value="#{orcamentoController.selected.formaPagamento}" /></td>
+                    <td>
+                        <h:selectOneMenu value="#{orcamentoController.selected.formaPagamento}">
+                            <f:selectItems var="formaPagamento" value="#{orcamentoController.formasPagamento}" itemLabel="#{formaPagamento.descricao}" itemValue="#{formaPagamento}" itemDisabled="#{formaPagamento.descricao}" />
+                        </h:selectOneMenu>
+                    </td>
                 </tr>
                 <tr>
                     <td>Parcelas:</td>
-                    <td><h:inputText value="#{orcamentoController.selected.parcelas}" /></td>
+                    <td><h:inputText value="#{orcamentoController.selected.vezes}" /></td>
                 </tr>
                 <tr>
                     <td>Observações:</td>

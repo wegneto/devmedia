@@ -66,7 +66,7 @@ public class Orcamento implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false, precision = 16, scale = 2)
-    private BigDecimal total;
+    private BigDecimal total = BigDecimal.ZERO;
     @Basic(optional = false)
     @NotNull
     @Column(name = "forma_pagamento", nullable = false, length = 9)

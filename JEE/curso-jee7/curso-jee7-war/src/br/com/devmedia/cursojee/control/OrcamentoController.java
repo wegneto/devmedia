@@ -2,9 +2,12 @@ package br.com.devmedia.cursojee.control;
 
 import br.com.devmedia.cursojee.entities.Anaminese;
 import br.com.devmedia.cursojee.entities.Cliente;
+import br.com.devmedia.cursojee.entities.FormaPagamento;
 import br.com.devmedia.cursojee.entities.Orcamento;
 import br.com.devmedia.cursojee.entities.OrcamentoServico;
+import br.com.devmedia.cursojee.entities.Usuario;
 import br.com.devmedia.cursojee.service.OrcamentoService;
+import br.com.devmedia.cursojee.service.UsuarioService;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -17,6 +20,9 @@ public class OrcamentoController extends BasicControl {
     
     @EJB
     private OrcamentoService service;
+    
+    @EJB
+    private UsuarioService usuarioService;
     
     @Inject
     private AnamineseController anamineseController;
@@ -91,6 +97,14 @@ public class OrcamentoController extends BasicControl {
         getSelected().setAnaminese(anaminese);
         anaminese.setOrcamento(getSelected());
         return "/restrito/addOrcamento.faces";
+    }
+    
+    public List<Usuario> getDentistas() {
+        return usuarioService.getDentistas();
+    }
+    
+    public FormaPagamento[] getFormasPagamento() {
+        return FormaPagamento.values();
     }
     
 }

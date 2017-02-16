@@ -56,6 +56,11 @@ public class UsuarioRepository extends BasicRepository {
         return getList(Usuario.class, query);
     }
     
+    public List<Usuario> getDentistas() {
+        String query = "select u from Usuario u where u.dentista = true";
+        return getList(Usuario.class, query);
+    }
+    
     public List<Usuario> getUsuariosByName(String nome) {
         String query = "select u from Usuario u where u.nome like ?1";
         return getList(Usuario.class, query, nome+"%");
