@@ -35,10 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import uk.co.jemos.podam.common.PodamExclude;
 
-/**
- *
- * @author 43189334587
- */
 @Entity
 @Table(name = "orcamento")
 @XmlRootElement

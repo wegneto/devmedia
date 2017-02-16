@@ -46,6 +46,10 @@ public class OrcamentoServico implements Serializable {
     @NotNull
     @Column(nullable = false, precision = 16, scale = 2)
     private BigDecimal custo;
+    @Basic(optional = false)
+    @NotNull
+    @Column(nullable = false)
+    private int quantidade;
     @Lob
     @Size(max = 65535)
     @Column(length = 65535)
@@ -58,6 +62,7 @@ public class OrcamentoServico implements Serializable {
     @ManyToOne(optional = false)
     @PodamExclude
     private Orcamento orcamento;
+    
 
     public OrcamentoServico() {
     }
@@ -135,5 +140,15 @@ public class OrcamentoServico implements Serializable {
     public String toString() {
         return "br.com.devmedia.cursojee.entities.OrcamentoServico[ id=" + id + " ]";
     }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
+    
     
 }
