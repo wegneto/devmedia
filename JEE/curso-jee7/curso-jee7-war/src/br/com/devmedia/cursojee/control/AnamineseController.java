@@ -74,5 +74,11 @@ public class AnamineseController extends BasicControl {
         cleanCache();
         return "/restrito/orcamento.faces";
     }
+    
+    public String remove() {
+        service.removeAnaminese(selected);
+        cleanCache();
+        return "/restrito/orcamento.faces";
+    }
 
 }

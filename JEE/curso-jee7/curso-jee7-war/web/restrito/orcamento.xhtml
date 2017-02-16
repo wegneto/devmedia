@@ -76,9 +76,9 @@
             <h:dataTable styleClass="tabela_basica" value="#{anamineseController.anamineses}" rendered="#{anamineseController.anamineses.size() ne 0}" var="item">
                 <h:column>
                     <f:facet name="header">
-                        Data do Orçamento
+                        Data da Anamnese
                     </f:facet>
-                    <h:outputText value="#{item.orcamento.data}"><f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
+                    <h:outputText value="#{item.data}"><f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>&nbsp;<h:outputText value="#{item.hora}"><f:convertDateTime pattern="hh:mm:ss"/></h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">

@@ -6,6 +6,7 @@
 package br.com.devmedia.cursojee.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -84,6 +87,16 @@ public class Anaminese implements Serializable {
     @ManyToOne(optional = true)
     @PodamExclude
     private Orcamento orcamento;
+    @Basic(optional = false)
+    @NotNull
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date data = new Date();
+    @Basic(optional = false)
+    @NotNull
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIME)
+    private Date hora = new Date();
 
     public Anaminese() {
     }
@@ -100,6 +113,22 @@ public class Anaminese implements Serializable {
         this.cirurgia = cirurgia;
         this.medicacao = medicacao;
         this.alergia = alergia;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Date getHora() {
+        return hora;
+    }
+
+    public void setHora(Date hora) {
+        this.hora = hora;
     }
 
     public Integer getId() {
