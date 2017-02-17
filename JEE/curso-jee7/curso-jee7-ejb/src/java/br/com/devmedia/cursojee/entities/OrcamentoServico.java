@@ -24,10 +24,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import uk.co.jemos.podam.common.PodamExclude;
 
-/**
- *
- * @author 43189334587
- */
 @Entity
 @Table(name = "orcamento_servico")
 @XmlRootElement
@@ -149,6 +145,8 @@ public class OrcamentoServico implements Serializable {
         this.quantidade = quantidade;
     }
     
-    
+    public BigDecimal getTotalItemParcial() {
+        return getServico().getCusto().multiply(getQuantidade());
+    }
     
 }

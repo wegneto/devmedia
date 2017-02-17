@@ -5,8 +5,10 @@ import br.com.devmedia.cursojee.entities.Cliente;
 import br.com.devmedia.cursojee.entities.FormaPagamento;
 import br.com.devmedia.cursojee.entities.Orcamento;
 import br.com.devmedia.cursojee.entities.OrcamentoServico;
+import br.com.devmedia.cursojee.entities.Servico;
 import br.com.devmedia.cursojee.entities.Usuario;
 import br.com.devmedia.cursojee.service.OrcamentoService;
+import br.com.devmedia.cursojee.service.ServicoService;
 import br.com.devmedia.cursojee.service.UsuarioService;
 import java.util.List;
 import javax.ejb.EJB;
@@ -32,6 +34,11 @@ public class OrcamentoController extends BasicControl {
     private List<Orcamento> orcamentos;
     
     private Cliente cliente;
+    
+    private OrcamentoServico orcamentoServico;
+    
+    @EJB
+    private ServicoService servicoService;
 
     public Cliente getCliente() {
         return cliente;
@@ -105,6 +112,29 @@ public class OrcamentoController extends BasicControl {
     
     public FormaPagamento[] getFormasPagamento() {
         return FormaPagamento.values();
+    }
+
+    public OrcamentoServico getOrcamentoServico() {
+        return orcamentoServico;
+    }
+
+    public void setOrcamentoServico(OrcamentoServico orcamentoServico) {
+        this.orcamentoServico = orcamentoServico;
+    }
+    
+    public List<Servico> getServicos() {
+        return servicoService.getServicos();
+    }
+    
+    public String addItem() {
+        orcamentoServico = new OrcamentoServico();
+        orcamentoServico.setOrcamento(selected);
+        return "/restrito/addOrcamentoItem.faces";
+    }
+    
+    public String createOrcamentoServico() {
+        selected.getOrcamentoServicoList().add(orcamentoServico);
+        return "/restrito/addOrcamento.faces";
     }
     
 }
