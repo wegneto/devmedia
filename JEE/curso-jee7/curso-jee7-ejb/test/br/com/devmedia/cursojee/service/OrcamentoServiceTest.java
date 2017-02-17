@@ -84,7 +84,7 @@ public class OrcamentoServiceTest {
         factory.populatePojo(orcamento);
         orcamento.setCliente(cliente);
         orcamento.setDentista(dentista);
-        orcamento.setFormaPagamento(FormaPagamento.CARTAO);
+        orcamento.setFormaPagamento(FormaPagamento.CREDITO);
         
         OrcamentoServico orcamentoServico = new OrcamentoServico();
         factory.populatePojo(orcamentoServico);

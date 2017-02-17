@@ -59,7 +59,7 @@ public class UsuarioRepository extends BasicRepository {
     
     public Usuario getUsuarioByExactName(String nome) {
         String query = "select u from Usuario u where u.nome = ?1";
-        return getPojo(Usuario.class, query, nome+"%");
+        return getPojo(Usuario.class, query, nome);
     }
 
     private String getMD5(String message) {

@@ -233,7 +233,7 @@ public class ClienteServiceTest {
         orcamento.setDentista(dentista);
         orcamento.setVezes(10);
         orcamento.setTotal(BigDecimal.TEN);
-        orcamento.setFormaPagamento(FormaPagamento.CARTAO);
+        orcamento.setFormaPagamento(FormaPagamento.CREDITO);
         
         List<Cliente> expResult = null;
         List<Cliente> result = instance.getClienteParaLigar(mes, ano);

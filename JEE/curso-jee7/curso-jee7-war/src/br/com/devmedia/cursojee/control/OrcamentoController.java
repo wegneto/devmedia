@@ -170,5 +170,9 @@ public class OrcamentoController extends BasicControl {
     public String editOrcamentoServico() {
         return "/restrito/editOrcamentoItem.faces";
     }
+    
+    public String create() {
+        return "";
+    }
 
 }

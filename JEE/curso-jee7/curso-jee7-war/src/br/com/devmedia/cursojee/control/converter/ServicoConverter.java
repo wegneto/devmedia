@@ -16,14 +16,14 @@ import javax.naming.NamingException;
 @FacesConverter("servicoConverter")
 public class ServicoConverter implements Converter {
 
-    ServicoService servicoService = lookupServicoServiceBean();
+    private ServicoService servicoService = lookupServicoServiceBean();
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         if (value == null) {
             return null;
         } else {
-            return lookupServicoServiceBean().getServicoByExactName(value);
+            return servicoService.getServicoByExactName(value);
         }
     }
 

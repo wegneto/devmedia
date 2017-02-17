@@ -79,7 +79,7 @@ public class AnamineseServiceTest {
         podam.populatePojo(orcamento);
         orcamento.setCliente(cliente);
         orcamento.setDentista(dentista);
-        orcamento.setFormaPagamento(FormaPagamento.CARTAO);
+        orcamento.setFormaPagamento(FormaPagamento.CREDITO);
         orcamento = orcamentoService.addOrcamento(orcamento);
     }
 

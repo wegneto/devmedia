@@ -22,7 +22,7 @@ public class UsuarioConverter implements Converter {
         if (value == null) {
             return null;
         } else {
-            return lookupUsuarioServiceBean().getUsuarioByExactName(value);
+            return usuarioService.getUsuarioByExactName(value);
         }
     }
 
