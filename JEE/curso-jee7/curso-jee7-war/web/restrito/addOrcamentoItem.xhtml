@@ -18,13 +18,14 @@
         
         <h3>Nova Item para #{orcamentoController.cliente.nome}</h3>
         <h:messages errorClass="msg_error"/>
-        <h:form id="frmAnamnese">
+        <h:form id="frmOrcamentoItem">
             <table>
                 <tr> 
                     <td>Serviço:</td>
                     <td>
                         <h:selectOneMenu value="#{orcamentoController.orcamentoServico.servico}">
                             <f:selectItems var="servico" value="#{orcamentoController.servicos}" itemLabel="#{servico.nome}" itemValue="#{servico}" itemDisabled="#{servico.nome}" />
+                            <f:converter converterId="servicoConverter"/>
                         </h:selectOneMenu>
                     </td>
                 </tr>
@@ -33,7 +34,7 @@
                     <td>
                         <h:inputText value="#{orcamentoController.orcamentoServico.quantidade}">
                             <f:convertNumber/>
-                            <f:ajax onevent="onblur" execute="@form" />
+                            <f:ajax onevent="onblur" render="@all" execute="@all" />
                         </h:inputText>
                     </td>
                 </tr>
@@ -43,7 +44,7 @@
                 </tr>
                 <tr>
                     <td>Valor Total:</td>
-                    <td><div id="valorTotalItem"><h:outputText value="#{orcamentoController.orcamentoServico.custo}"><f:convertNumber type="currency"/></h:outputText></div></td>
+                    <td><div id="valorTotalItem"><h:outputText value="#{orcamentoController.orcamentoServico.totalItemParcial}"><f:convertNumber type="currency"/></h:outputText></div></td>
                 </tr>
             </table>
             <h:commandButton action="#{orcamentoController.createOrcamentoServico()}" value="Cadastrar"/> <h:commandButton action="addOrcamento.faces" value="Cancelar" immediate="true"/>

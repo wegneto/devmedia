@@ -146,7 +146,11 @@ public class OrcamentoServico implements Serializable {
     }
     
     public BigDecimal getTotalItemParcial() {
-        return getServico().getCusto().multiply(getQuantidade());
+        if (getServico() != null) {
+            return getServico().getCusto().multiply(BigDecimal.valueOf((long) getQuantidade()));
+        } else {
+            return BigDecimal.ZERO;
+        }
     }
     
 }

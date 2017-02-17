@@ -55,4 +55,8 @@ public class ServicoService extends BasicService {
         return repository.getServicoByNome(nome);
     }
 
+    public List<Servico> getServicoByExactName(String nome) {
+        return repository.getServicoByExactName(nome);
+    }
+    
 }

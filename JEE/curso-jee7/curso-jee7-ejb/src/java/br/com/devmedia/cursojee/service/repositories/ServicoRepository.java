@@ -45,4 +45,9 @@ public class ServicoRepository extends BasicRepository{
         return getList(Servico.class, query, nome+"%");
     }
     
+    public Servico getServicoByExactName(String nome) {
+        String query = "select s from Servico s where s.nome = ?1";
+        return getPojo(Servico.class, query, nome);
+    }
+    
 }
