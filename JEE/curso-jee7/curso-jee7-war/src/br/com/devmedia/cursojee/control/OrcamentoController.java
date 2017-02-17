@@ -20,24 +20,24 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class OrcamentoController extends BasicControl {
-    
+
     @EJB
     private OrcamentoService service;
-    
+
     @EJB
     private UsuarioService usuarioService;
-    
+
     @Inject
     private AnamineseController anamineseController;
-    
+
     private Orcamento selected;
-    
+
     private List<Orcamento> orcamentos;
-    
+
     private Cliente cliente;
-    
+
     private OrcamentoServico orcamentoServico;
-    
+
     @EJB
     private ServicoService servicoService;
 
@@ -72,16 +72,16 @@ public class OrcamentoController extends BasicControl {
     public void setOrcamentos(List<Orcamento> orcamentos) {
         this.orcamentos = orcamentos;
     }
-    
+
     public String atenderCliente(Cliente cliente) {
-       setCliente(cliente);
-       anamineseController.setCliente(cliente);
-       anamineseController.cleanCache();
-       cleanCache();
-       
-       return "/restrito/orcamento.faces";
+        setCliente(cliente);
+        anamineseController.setCliente(cliente);
+        anamineseController.cleanCache();
+        cleanCache();
+
+        return "/restrito/orcamento.faces";
     }
-   
+
     public String getOrcamentoItens(Orcamento orcamento) {
         StringBuilder sb = new StringBuilder();
         for (OrcamentoServico item : orcamento.getOrcamentoServicoList()) {
@@ -90,7 +90,7 @@ public class OrcamentoController extends BasicControl {
             }
             sb.append(item.getServico().getNome());
         }
-        
+
         return sb.toString();
     }
 
@@ -99,18 +99,18 @@ public class OrcamentoController extends BasicControl {
         getSelected().setCliente(getCliente());
         setOrcamentos(service.getOrcamentos(getCliente().getId()));
     }
-    
+
     public String criarOrcamento(Anaminese anaminese) {
         cleanCache();
         getSelected().setAnaminese(anaminese);
         anaminese.setOrcamento(getSelected());
         return "/restrito/addOrcamento.faces";
     }
-    
+
     public List<Usuario> getDentistas() {
         return usuarioService.getDentistas();
     }
-    
+
     public FormaPagamento[] getFormasPagamento() {
         return FormaPagamento.values();
     }
@@ -122,17 +122,17 @@ public class OrcamentoController extends BasicControl {
     public void setOrcamentoServico(OrcamentoServico orcamentoServico) {
         this.orcamentoServico = orcamentoServico;
     }
-    
+
     public List<Servico> getServicos() {
         return servicoService.getServicos();
     }
-    
+
     public String addItem() {
         orcamentoServico = new OrcamentoServico();
         orcamentoServico.setOrcamento(selected);
         return "/restrito/addOrcamentoItem.faces";
     }
-    
+
     public String createOrcamentoServico() {
         orcamentoServico.setCusto(orcamentoServico.getTotalItemParcial());
         selected.getOrcamentoServicoList().add(orcamentoServico);
@@ -143,7 +143,16 @@ public class OrcamentoController extends BasicControl {
         selected.setTotal(total);
         return "/restrito/addOrcamento.faces";
     }
-    
+
+    public String updateOrcamentoServico() {
+        if (orcamentoServico.getId() != null) {
+            service.setOrcamentoServico(orcamentoServico);
+        }
+        orcamentoServico.setCusto(orcamentoServico.getTotalItemParcial());
+        recalcular();
+        return "/restrito/addOrcamento.faces";
+    }
+
     private void recalcular() {
         BigDecimal total = BigDecimal.ZERO;
         for (OrcamentoServico os : selected.getOrcamentoServicoList()) {
@@ -151,11 +160,15 @@ public class OrcamentoController extends BasicControl {
         }
         selected.setTotal(total);
     }
-    
+
     public String removeOrcamentoServico() {
         selected.getOrcamentoServicoList().remove(orcamentoServico);
         recalcular();
         return "/restrito/addOrcamento.faces";
     }
-    
+
+    public String editOrcamentoServico() {
+        return "/restrito/editOrcamentoItem.faces";
+    }
+
 }

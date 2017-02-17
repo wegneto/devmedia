@@ -76,11 +76,11 @@
                     <f:facet name="header">
                         Ações
                     </f:facet>
-                    <h:commandLink action="#{clienteController.editCliente()}">
+                    <h:commandLink immediate="true" action="#{orcamentoController.editOrcamentoServico()}">
                         <h:graphicImage value="/resources/images/update.png"/> 
-                        <f:setPropertyActionListener value="#{item}" target="#{clienteController.selected}" />
+                        <f:setPropertyActionListener value="#{item}" target="#{orcamentoController.orcamentoServico}" />
                     </h:commandLink>
-                    <h:commandLink action="#{orcamentoController.removeOrcamentoServico()}" onclick="return confirm('Confirma a exclusão do item?')">
+                    <h:commandLink immediate="true" action="#{orcamentoController.removeOrcamentoServico()}" onclick="return confirm('Confirma a exclusão do item?')">
                         <h:graphicImage value="/resources/images/remove.png"/> 
                         <f:setPropertyActionListener value="#{item}" target="#{orcamentoController.orcamentoServico}" />
                     </h:commandLink>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.devmedia.cursojee.service.repositories;
 
 import br.com.devmedia.cursojee.entities.Usuario;
@@ -10,10 +5,6 @@ import java.security.MessageDigest;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-/**
- *
- * @author 43189334587
- */
 public class UsuarioRepository extends BasicRepository {
 
     public UsuarioRepository(EntityManager entityManager) {
@@ -64,6 +55,11 @@ public class UsuarioRepository extends BasicRepository {
     public List<Usuario> getUsuariosByName(String nome) {
         String query = "select u from Usuario u where u.nome like ?1";
         return getList(Usuario.class, query, nome+"%");
+    }
+    
+    public Usuario getUsuarioByExactName(String nome) {
+        String query = "select u from Usuario u where u.nome = ?1";
+        return getPojo(Usuario.class, query, nome+"%");
     }
 
     private String getMD5(String message) {

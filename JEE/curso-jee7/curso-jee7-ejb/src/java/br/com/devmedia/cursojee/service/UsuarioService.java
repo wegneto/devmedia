@@ -82,4 +82,8 @@ public class UsuarioService extends BasicService {
         return usrRepo.getUsuariosByName(name);
     }
     
+    public Usuario getUsuarioByExactName(String name) {
+        return usrRepo.getUsuarioByExactName(name);
+    }
+    
 }

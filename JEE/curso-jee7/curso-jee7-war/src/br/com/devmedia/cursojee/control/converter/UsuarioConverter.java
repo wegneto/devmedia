@@ -1,10 +1,9 @@
 package br.com.devmedia.cursojee.control.converter;
 
-import br.com.devmedia.cursojee.entities.Servico;
-import br.com.devmedia.cursojee.service.ServicoService;
+import br.com.devmedia.cursojee.entities.Usuario;
+import br.com.devmedia.cursojee.service.UsuarioService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -13,17 +12,17 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-@FacesConverter("servicoConverter")
-public class ServicoConverter implements Converter {
+@FacesConverter(forClass = Usuario.class)
+public class UsuarioConverter implements Converter {
 
-    ServicoService servicoService = lookupServicoServiceBean();
+    UsuarioService usuarioService = lookupUsuarioServiceBean();
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         if (value == null) {
             return null;
         } else {
-            return lookupServicoServiceBean().getServicoByExactName(value);
+            return lookupUsuarioServiceBean().getUsuarioByExactName(value);
         }
     }
 
@@ -32,14 +31,14 @@ public class ServicoConverter implements Converter {
         if (value == null) {
             return null;
         } else {
-            return ((Servico) value).getNome();
+            return ((Usuario)value).getNome();
         }
     }
 
-    private ServicoService lookupServicoServiceBean() {
+    private UsuarioService lookupUsuarioServiceBean() {
         try {
             Context c = new InitialContext();
-            return (ServicoService) c.lookup("java:global/curso-jee7/curso-jee7-ejb/ServicoService!br.com.devmedia.cursojee.service.ServicoService");
+            return (UsuarioService) c.lookup("java:global/curso-jee7/curso-jee7-ejb/UsuarioService!br.com.devmedia.cursojee.service.UsuarioService");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

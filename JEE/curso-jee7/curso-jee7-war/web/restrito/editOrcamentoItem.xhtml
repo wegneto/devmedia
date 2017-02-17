@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./base.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="pageTitle">
+        Editando Item para #{orcamentoController.cliente.nome}
+    </ui:define>
+
+    <ui:define name="content">
+        <script> 
+            $(document).ready(function() {
+            });
+        </script>
+        
+        
+        <h3>Nova Item para #{orcamentoController.cliente.nome}</h3>
+        <h:messages errorClass="msg_error"/>
+        <h:form id="frmOrcamentoItem">
+            <table>
+                <tr> 
+                    <td>Serviço:</td>
+                    <td>
+                        <h:selectOneMenu value="#{orcamentoController.orcamentoServico.servico}">
+                            <f:selectItems var="servico" value="#{orcamentoController.servicos}" itemLabel="#{servico.nome}" itemValue="#{servico}" itemDisabled="#{servico.nome}" />
+                            <f:converter converterId="servicoConverter"/>
+                        </h:selectOneMenu>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Quantidade:</td>
+                    <td>
+                        <h:inputText value="#{orcamentoController.orcamentoServico.quantidade}">
+                            <f:convertNumber/>
+                            <f:ajax onevent="onblur" render="@all" execute="@all" />
+                        </h:inputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Observações:</td>
+                    <td><h:inputTextarea value="#{orcamentoController.orcamentoServico.observacoes}" /></td>
+                </tr>
+                <tr>
+                    <td>Valor Total:</td>
+                    <td><div id="valorTotalItem"><h:outputText value="#{orcamentoController.orcamentoServico.totalItemParcial}"><f:convertNumber type="currency"/></h:outputText></div></td>
+                </tr>
+            </table>
+            <h:commandButton action="#{orcamentoController.updateOrcamentoServico()}" value="Cadastrar"/> <h:commandButton action="addOrcamento.faces" value="Cancelar" immediate="true"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
