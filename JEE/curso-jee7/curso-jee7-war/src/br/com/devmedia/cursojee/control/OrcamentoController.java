@@ -10,6 +10,7 @@ import br.com.devmedia.cursojee.entities.Usuario;
 import br.com.devmedia.cursojee.service.OrcamentoService;
 import br.com.devmedia.cursojee.service.ServicoService;
 import br.com.devmedia.cursojee.service.UsuarioService;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -133,7 +134,27 @@ public class OrcamentoController extends BasicControl {
     }
     
     public String createOrcamentoServico() {
+        orcamentoServico.setCusto(orcamentoServico.getTotalItemParcial());
         selected.getOrcamentoServicoList().add(orcamentoServico);
+        BigDecimal total = BigDecimal.ZERO;
+        for (OrcamentoServico os : selected.getOrcamentoServicoList()) {
+            total = total.add(os.getCusto());
+        }
+        selected.setTotal(total);
+        return "/restrito/addOrcamento.faces";
+    }
+    
+    private void recalcular() {
+        BigDecimal total = BigDecimal.ZERO;
+        for (OrcamentoServico os : selected.getOrcamentoServicoList()) {
+            total = total.add(os.getCusto());
+        }
+        selected.setTotal(total);
+    }
+    
+    public String removeOrcamentoServico() {
+        selected.getOrcamentoServicoList().remove(orcamentoServico);
+        recalcular();
         return "/restrito/addOrcamento.faces";
     }
     

@@ -23,7 +23,7 @@ public class ServicoConverter implements Converter {
         if (value == null) {
             return null;
         } else {
-            return lookupServicoServiceBean().getServicoByNome(value.toString());
+            return lookupServicoServiceBean().getServicoByExactName(value.toString());
         }
     }
 

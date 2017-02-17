@@ -72,6 +72,19 @@
                     </f:facet>
                     #{item.quantidade}
                 </h:column>
+                <h:column rendered="#{usuarioControl.loggedUser.administrador}">
+                    <f:facet name="header">
+                        Ações
+                    </f:facet>
+                    <h:commandLink action="#{clienteController.editCliente()}">
+                        <h:graphicImage value="/resources/images/update.png"/> 
+                        <f:setPropertyActionListener value="#{item}" target="#{clienteController.selected}" />
+                    </h:commandLink>
+                    <h:commandLink action="#{orcamentoController.removeOrcamentoServico()}" onclick="return confirm('Confirma a exclusão do item?')">
+                        <h:graphicImage value="/resources/images/remove.png"/> 
+                        <f:setPropertyActionListener value="#{item}" target="#{orcamentoController.orcamentoServico}" />
+                    </h:commandLink>
+                </h:column>
             </h:dataTable>
             <h:commandButton immediate="true" action="#{orcamentoController.addItem}" value="Adicionar item"/>
             <table>
