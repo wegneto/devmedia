@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/wegneto/Desenvolvimento/workspace/devmedia/JEE/curso-jee7/curso-jee7-war/web/restrito/orcamento.xhtml</file>
+            <file>file:/Users/wegneto/Desenvolvimento/workspace/devmedia/JEE/curso-jee7/curso-jee7-war/src/br/com/devmedia/cursojee/control/OrcamentoController.java</file>
+            <file>file:/Users/wegneto/Desenvolvimento/workspace/devmedia/JEE/curso-jee7/curso-jee7-war/web/restrito/addOrcamento.xhtml</file>
+            <file>file:/Users/wegneto/Desenvolvimento/workspace/devmedia/JEE/curso-jee7/curso-jee7-war/src/br/com/devmedia/cursojee/control/converter/FormaPagamentoConverter.java</file>
+        </group>
     </open-files>
 </project-private>

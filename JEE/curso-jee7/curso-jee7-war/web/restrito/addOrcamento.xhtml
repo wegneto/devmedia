@@ -104,13 +104,14 @@
                     <td>Forma de pagamento:</td>
                     <td>
                         <h:selectOneMenu value="#{orcamentoController.selected.formaPagamento}">
+                            <f:converter converterId="formaPagamentoConverter"/>
                             <f:selectItems var="formaPagamento" value="#{orcamentoController.formasPagamento}" itemLabel="#{formaPagamento.descricao}" itemValue="#{formaPagamento}" itemDisabled="#{formaPagamento.descricao}" />
                         </h:selectOneMenu>
                     </td>
                 </tr>
                 <tr>
                     <td>Parcelas:</td>
-                    <td><h:inputText value="#{orcamentoController.selected.vezes}" /></td>
+                    <td><h:inputText id="parcelas" value="#{orcamentoController.selected.vezes}" /></td>
                 </tr>
                 <tr>
                     <td>Observações:</td>

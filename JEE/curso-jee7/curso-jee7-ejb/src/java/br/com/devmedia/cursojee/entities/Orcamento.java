@@ -52,12 +52,12 @@ public class Orcamento implements Serializable {
     @NotNull
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date data;
+    private Date data = new Date();
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false)
     @Temporal(TemporalType.TIME)
-    private Date hora;
+    private Date hora = new Date();
     @Lob
     @Size(max = 65535)
     @Column(length = 65535)
@@ -69,7 +69,7 @@ public class Orcamento implements Serializable {
     private BigDecimal total = BigDecimal.ZERO;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "forma_pagamento", nullable = false, length = 9)
+    @Column(name = "forma_pagamento", nullable = false)
     @Enumerated(EnumType.STRING)
     @PodamExclude
     private FormaPagamento formaPagamento;

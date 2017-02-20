@@ -14,6 +14,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -170,9 +172,20 @@ public class OrcamentoController extends BasicControl {
     public String editOrcamentoServico() {
         return "/restrito/editOrcamentoItem.faces";
     }
-    
+
     public String create() {
-        return "";
+        if (!selected.getFormaPagamento().equals(FormaPagamento.CREDITO)) {
+            selected.setVezes(1);
+        } else if (selected.getVezes() == null || selected.getVezes() <= 0) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Número de parcelas é obrigatório.", "Número de parcelas é obrigatório.");
+            FacesContext.getCurrentInstance().addMessage("parcelas", fm);
+            return "/restrito/addOrcamento.faces";
+        }
+        
+        selected.setCliente(cliente);
+        service.addOrcamento(selected);
+
+        return "/restrito/orcamento.faces";
     }
 
 }

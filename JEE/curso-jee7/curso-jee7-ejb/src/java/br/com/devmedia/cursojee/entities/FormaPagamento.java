@@ -5,13 +5,9 @@
  */
 package br.com.devmedia.cursojee.entities;
 
-/**
- *
- * @author 43189334587
- */
 public enum FormaPagamento {
 
-    DINHEIRO("Dinheiro"), CREDITO("Crédito"), DEBITO("Débito");
+    DINHEIRO("Dinheiro"), CREDITO("Crédito");
 
     private final String descricao;
 
