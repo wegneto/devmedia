@@ -7,7 +7,7 @@ package br.com.devmedia.cursojee.entities;
 
 public enum FormaPagamento {
 
-    DINHEIRO("Dinheiro"), CREDITO("Crédito");
+    DINHEIRO("Dinheiro"), CREDITO("Crédito"), DEBITO("Débito");
 
     private final String descricao;
 

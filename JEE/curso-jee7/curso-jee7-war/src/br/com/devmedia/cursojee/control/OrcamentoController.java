@@ -184,6 +184,8 @@ public class OrcamentoController extends BasicControl {
         
         selected.setCliente(cliente);
         service.addOrcamento(selected);
+        
+        cleanCache();
 
         return "/restrito/orcamento.faces";
     }

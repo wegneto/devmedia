@@ -15,7 +15,7 @@ public class FormaPagamentoConverter implements Converter {
             return null;
         } else {
             for (FormaPagamento object : FormaPagamento.values()) {
-                if (object.getDescricao().equals(value)) {
+                if (object.getDescricao().equalsIgnoreCase(value)) {
                     return object;
                 }
             }
