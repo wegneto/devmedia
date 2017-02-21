@@ -3,10 +3,6 @@
     <persistence-unit name="curso-jee7-ejbPU" transaction-type="JTA">
         <jta-data-source>jdbc/cursojeepool</jta-data-source>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
-        <properties>
-            <property name="eclipselink.logging.level" value="FINE"/>
-            <property name="eclipselink.logging.level.sql" value="FINE"/>
-            <property name="eclipselink.logging.parameters" value="true"/>
-        </properties>
+        <properties />
     </persistence-unit>
 </persistence>

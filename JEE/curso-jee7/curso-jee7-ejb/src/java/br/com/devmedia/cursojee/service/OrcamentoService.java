@@ -27,7 +27,7 @@ public class OrcamentoService extends BasicService {
 
     @PersistenceContext
     private EntityManager em;
-    
+
     @EJB
     private FinanceiroService financeiroService;
 
@@ -41,15 +41,23 @@ public class OrcamentoService extends BasicService {
 
     public Orcamento addOrcamento(Orcamento orcamento) {
         Orcamento orcamentoCriado = repository.addOrcamento(orcamento);
+
+        float valorParcela = Math.round(orcamentoCriado.getTotal().floatValue() / orcamentoCriado.getVezes());
+
         for (int i = 0; i < orcamentoCriado.getVezes(); i++) {
             Parcela parcela = new Parcela();
-            parcela.setNumero(i+1);
+            parcela.setNumero(i + 1);
             parcela.setOrcamento(orcamentoCriado);
             parcela.setPago(false);
-            parcela.setValor(orcamentoCriado.getTotal().divide(BigDecimal.valueOf(orcamentoCriado.getVezes())));
+            if ((i + 1) == orcamentoCriado.getVezes()) {
+                float valorUltimaParcela = orcamentoCriado.getTotal().floatValue() - (valorParcela * i);
+                parcela.setValor(BigDecimal.valueOf(valorUltimaParcela));
+            } else {
+                parcela.setValor(BigDecimal.valueOf(valorParcela));
+            }
             financeiroService.addParcela(parcela);
         }
-        
+
         return orcamentoCriado;
     }
 
@@ -64,11 +72,11 @@ public class OrcamentoService extends BasicService {
     public Orcamento getOrcamento(int id) {
         return repository.getOrcamento(id);
     }
-    
+
     public List<OrcamentoServico> getServico(int orcamentoId) {
         return repository.getServico(orcamentoId);
     }
-    
+
     public OrcamentoServico addOrcamentoServico(OrcamentoServico orcamentoServico) {
         return repository.addOrcamentoServico(orcamentoServico);
     }
@@ -84,9 +92,9 @@ public class OrcamentoService extends BasicService {
     public void removeOrcamentoServico(OrcamentoServico orcamentoServico) {
         repository.removeOrcamentoServico(orcamentoServico);
     }
-    
+
     public List<Orcamento> getOrcamentos(int clienteId) {
         return repository.getOrcamentos(clienteId);
     }
-    
+
 }
