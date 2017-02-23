@@ -36,7 +36,7 @@ public class FinanceiroRepository extends BasicRepository {
     }
 
     public List<Parcela> getParcelasByOrcamento(int idOrcamento) {
-        String query = "select p from Parcela p where p.idOrcamento.id = ?1";
+        String query = "select p from Parcela p where p.orcamento.id = ?1";
         return getList(Parcela.class, query, idOrcamento);
     }
 

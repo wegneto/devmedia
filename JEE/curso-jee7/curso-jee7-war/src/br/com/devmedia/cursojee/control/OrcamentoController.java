@@ -183,10 +183,20 @@ public class OrcamentoController extends BasicControl {
         }
         
         selected.setCliente(cliente);
+        //selected.setAnaminese(anaminese);
+        
+        System.out.println("---> ANAMNESE: " + selected.getAnaminese().getId());
+        
         service.addOrcamento(selected);
         
         cleanCache();
 
+        return "/restrito/orcamento.faces";
+    }
+    
+    public String remove() {
+        service.removeOrcamento(selected);
+        cleanCache();
         return "/restrito/orcamento.faces";
     }
 

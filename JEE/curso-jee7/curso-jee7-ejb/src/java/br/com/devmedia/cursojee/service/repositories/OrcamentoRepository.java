@@ -1,8 +1,8 @@
 package br.com.devmedia.cursojee.service.repositories;
 
-import br.com.devmedia.cursojee.entities.Cliente;
 import br.com.devmedia.cursojee.entities.Orcamento;
 import br.com.devmedia.cursojee.entities.OrcamentoServico;
+import br.com.devmedia.cursojee.entities.Parcela;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -25,6 +25,15 @@ public class OrcamentoRepository extends BasicRepository {
     }
 
     public void removeOrcamento(Orcamento orcamento) {
+        Orcamento orcReal = getOrcamento(orcamento.getId());  
+        for (Parcela par : new FinanceiroRepository(getEntityManager()).getParcelasByOrcamento(orcamento.getId())) {
+            getEntityManager().remove(par);
+        }
+        orcamento.setParcelas(null);
+        for (OrcamentoServico item : getServico(orcamento.getId())) {
+            getEntityManager().remove(item);
+        }
+        orcamento.setOrcamentoServicoList(null);
         removeEntity(orcamento);
     }
     

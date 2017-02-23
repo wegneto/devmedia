@@ -72,6 +72,7 @@ public class Orcamento implements Serializable {
     @Column(name = "forma_pagamento", nullable = false)
     @Enumerated(EnumType.STRING)
     @PodamExclude
+    
     private FormaPagamento formaPagamento;
     private Integer vezes;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id", nullable = false)
@@ -86,7 +87,6 @@ public class Orcamento implements Serializable {
     @PodamExclude
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento")
     private List<Parcela> parcelas = new LinkedList<>();
-    @PodamExclude
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "orcamento")
     private Anaminese anaminese;
 
