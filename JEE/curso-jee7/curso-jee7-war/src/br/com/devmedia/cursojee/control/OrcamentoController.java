@@ -134,6 +134,10 @@ public class OrcamentoController extends BasicControl {
         orcamentoServico.setOrcamento(selected);
         return "/restrito/addOrcamentoItem.faces";
     }
+    
+    public String addItemEdit() {
+        return "";
+    }
 
     public String createOrcamentoServico() {
         orcamentoServico.setCusto(orcamentoServico.getTotalItemParcial());
@@ -154,6 +158,15 @@ public class OrcamentoController extends BasicControl {
         recalcular();
         return "/restrito/addOrcamento.faces";
     }
+    
+    public String updateOrcamentoServicoEdit() {
+        if (orcamentoServico.getId() != null) {
+            service.setOrcamentoServico(orcamentoServico);
+        }
+        orcamentoServico.setCusto(orcamentoServico.getTotalItemParcial());
+        recalcular();
+        return "/restrito/editOrcamento.faces";
+    }
 
     private void recalcular() {
         BigDecimal total = BigDecimal.ZERO;
@@ -168,9 +181,19 @@ public class OrcamentoController extends BasicControl {
         recalcular();
         return "/restrito/addOrcamento.faces";
     }
+    
+    public String removeOrcamentoServicoEdit() {
+        selected.getOrcamentoServicoList().remove(orcamentoServico);
+        recalcular();
+        return "/restrito/editOrcamento.faces";
+    }
 
     public String editOrcamentoServico() {
         return "/restrito/editOrcamentoItem.faces";
+    }
+    
+    public String editOrcamentoServicoEdit() {
+        return "/restrito/editOrcamentoItemEdit.faces";
     }
 
     public String create() {
@@ -183,10 +206,6 @@ public class OrcamentoController extends BasicControl {
         }
         
         selected.setCliente(cliente);
-        //selected.setAnaminese(anaminese);
-        
-        System.out.println("---> ANAMNESE: " + selected.getAnaminese().getId());
-        
         service.addOrcamento(selected);
         
         cleanCache();
@@ -198,6 +217,15 @@ public class OrcamentoController extends BasicControl {
         service.removeOrcamento(selected);
         cleanCache();
         return "/restrito/orcamento.faces";
+    }
+    
+    public String edit() {
+        return "/restrito/editOrcamento.faces"; 
+    }
+    
+    public String update() {
+        cleanCache();
+        return "/restrito/orcamento.faces"; 
     }
 
 }
