@@ -62,7 +62,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>pastelaria-online</finalName>
+		<finalName>pastelariaonline</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
