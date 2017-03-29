@@ -12,7 +12,7 @@
 	<properties>
 		<glassfish.user>admin</glassfish.user>
 		<glassfish.password>admin</glassfish.password>
-		<glassfish.directory>/Users/wegneto/Desenvolvimento/Servidores/glassfish-4.0</glassfish.directory>
+		<glassfish.directory>/Users/wegneto/Desenvolvimento/Servidores/glassfish-4.0/glassfish/</glassfish.directory>
 		<glassfish.port>8080</glassfish.port>
 	</properties>
 
