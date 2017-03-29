@@ -1,4 +1,4 @@
-package com.wegneto.pastelariaonline.entity;
+package com.wegneto.pastelariaonline.domain;
 
 import java.io.Serializable;
 import java.util.Date;

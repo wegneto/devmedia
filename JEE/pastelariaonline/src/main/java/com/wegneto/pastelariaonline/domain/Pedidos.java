@@ -1,9 +1,8 @@
-package com.wegneto.pastelariaonline.vo;
+package com.wegneto.pastelariaonline.domain;
 
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.wegneto.pastelariaonline.entity.Pedido;
 
 public class Pedidos {
 	private List<Pedido> pedidos;

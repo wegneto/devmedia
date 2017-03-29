@@ -1,4 +1,4 @@
-package com.wegneto.pastelariaonline.entity;
+package com.wegneto.pastelariaonline.domain;
 
 public enum Status {
 	N("Novo"), A("Em atendimento"), C("Cancelado"), F("Finalizado");

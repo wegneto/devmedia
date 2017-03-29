@@ -1,4 +1,4 @@
-package com.wegneto.pastelariaonline.servlet;
+package com.wegneto.pastelariaonline.presentation.servlet;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.wegneto.pastelariaonline.entity.Pedido;
-import com.wegneto.pastelariaonline.service.PedidoService;
-import com.wegneto.pastelariaonline.vo.Resultado;
+import com.wegneto.pastelariaonline.domain.Pedido;
+import com.wegneto.pastelariaonline.domain.Resultado;
+import com.wegneto.pastelariaonline.domain.service.PedidoService;
 
 @WebServlet(urlPatterns = "/pedido", loadOnStartup = 1)
 public class EfetuarPedidoServlet extends HttpServlet {

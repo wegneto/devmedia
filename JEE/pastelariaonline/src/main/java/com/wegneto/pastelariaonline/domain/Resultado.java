@@ -1,4 +1,4 @@
-package com.wegneto.pastelariaonline.vo;
+package com.wegneto.pastelariaonline.domain;
 
 import java.io.Serializable;
 

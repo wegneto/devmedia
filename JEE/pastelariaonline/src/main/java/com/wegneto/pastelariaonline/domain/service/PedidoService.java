@@ -1,4 +1,4 @@
-package com.wegneto.pastelariaonline.service;
+package com.wegneto.pastelariaonline.domain.service;
 
 import java.util.Date;
 import java.util.List;
@@ -11,9 +11,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.google.common.base.Preconditions;
-import com.wegneto.pastelariaonline.entity.Pedido;
-import com.wegneto.pastelariaonline.entity.Status;
-import com.wegneto.pastelariaonline.vo.Pedidos;
+import com.wegneto.pastelariaonline.domain.Pedido;
+import com.wegneto.pastelariaonline.domain.Pedidos;
+import com.wegneto.pastelariaonline.domain.Status;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
