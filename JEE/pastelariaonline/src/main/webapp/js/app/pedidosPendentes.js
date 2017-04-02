@@ -1,19 +1,39 @@
-var tabelaTemplate = '<p align="center">' + '<table id="pedidos">' + '<thead>'
-		+ '<tr>' + '<th>ID do pedido</th>' + '<th>Data do pedido</th>'
-		+ '<th>Sabor</th>' + '<th>Quantidade</th>' + '<th>Cliente</th>'
-		+ '<th>Telefone</th>' + '<th>E-mail</th>' + '<th>Status</th>'
-		+ '<th>Atendente</th>' + '<th>Data do atendimento</th>' + '</tr>'
-		+ '</thead>' + '<tbody>' + '<% _.each(pedidos, function(pedido) { %>'
-		+ '<tr>' + '<td><%= pedido.id %></td>'
-		+ '<td><%= _.formatdate(pedido.dataPedido) %></td>'
-		+ '<td><%= pedido.itens[0].sabor %></td>'
-		+ '<td><%= pedido.itens[0].quantidade %></td>'
-		+ '<td><%= pedido.cliente %></td>' + '<td><%= pedido.telefone %></td>'
-		+ '<td><%= pedido.email %></td>'
-		+ '<td><%= _.status(pedido.status) %></td>'
-		+ '<td><%= pedido.atendente %></td>'
-		+ '<td><%= _.formatdate(pedido.dataAtendimento) %></td>' + '</tr>'
-		+ '<% }); %>' + '</tbody>' + '</table>' + '</p>';
+var tabelaTemplate = '<p align="center">' +
+  '<table id="pedidos">' + 
+  '<thead>' +
+  '<tr>' +
+  '<th>ID do pedido</th>' +
+  '<th>Data do pedido</th>' +
+  '<th>Sabor</th>' +
+  '<th>Quantidade</th>' +
+  '<th>Cliente</th>' +
+  '<th>Telefone</th>' +
+  '<th>E-mail</th>' +        
+  '<th>Status</th>' +
+  '<th>Atendente</th>' +
+  '<th>Data do atendimento</th>' +
+  '<th></th>' +
+  '</tr>' +
+  '</thead>' +
+  '<tbody>' +
+  '<% _.each(pedidos, function(pedido) { %>' +
+  '<tr>' +
+  '<td><%= pedido.id %></td>' +
+  '<td><%= _.formatdate(pedido.dataPedido) %></td>' +
+  '<td><%= pedido.itens[0].sabor %></td>' +
+  '<td><%= pedido.itens[0].quantidade %></td>' +
+  '<td><%= pedido.cliente %></td>' + 
+  '<td><%= pedido.telefone %></td>' +
+  '<td><%= pedido.email %></td>' +    
+  '<td><%= _.status(pedido.status) %></td>' +
+  '<td><%= pedido.atendente %></td>' +
+  '<td><%= _.formatdate(pedido.dataAtendimento) %></td>' +   
+  '<td><input type="button" value="Atender" <%= ((pedido.status != \'N\')? "disabled" : undefined)  %> onclick="atender(<%= pedido.id %>, \'<%= pedido.status %>\')"</td>' +
+  '</tr>' +
+  '<% }); %>' +
+  '</tbody>' +
+  '</table>' +
+  '</p>';
 
 function montarTabela(json) {
 	if (json) {
