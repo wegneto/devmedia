@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.wegneto.pastelariaonline.domain.Pedido;
 import com.wegneto.pastelariaonline.domain.Resultado;
 import com.wegneto.pastelariaonline.domain.service.PedidoService;
+import com.wegneto.pastelariaonline.presentation.websocket.NotificacaoWebSocket;
 
 @WebServlet(urlPatterns = "/pedido", loadOnStartup = 1)
 public class EfetuarPedidoServlet extends HttpServlet {
@@ -22,6 +23,9 @@ public class EfetuarPedidoServlet extends HttpServlet {
 
 	@EJB
 	private PedidoService pedidoService;
+
+	@EJB
+	private NotificacaoWebSocket notificacaoWebSocket;
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,6 +36,8 @@ public class EfetuarPedidoServlet extends HttpServlet {
 			final InputStreamReader inputStreamReader = new InputStreamReader(req.getInputStream());
 			final Pedido pedido = gson.fromJson(inputStreamReader, Pedido.class);
 			pedidoService.registrar(pedido);
+			notificacaoWebSocket.notificar();
+
 			resp.setStatus(200);
 			resp.getWriter().write(gson.toJson(new Resultado(true, "Pedido realizado com exito")));
 		} catch (final RuntimeException e) {

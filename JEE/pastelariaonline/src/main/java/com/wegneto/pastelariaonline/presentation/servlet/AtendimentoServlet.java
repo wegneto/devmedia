@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.wegneto.pastelariaonline.domain.Resultado;
 import com.wegneto.pastelariaonline.domain.service.PedidoService;
+import com.wegneto.pastelariaonline.presentation.websocket.NotificacaoWebSocket;
 
 @WebServlet(urlPatterns = "/atendimento", loadOnStartup = 1)
 public class AtendimentoServlet extends HttpServlet {
@@ -21,6 +22,9 @@ public class AtendimentoServlet extends HttpServlet {
 	@EJB
 	private PedidoService pedidoService;
 
+	@EJB
+	private NotificacaoWebSocket notificacaoWebSocket;
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("application/json");
@@ -29,6 +33,7 @@ public class AtendimentoServlet extends HttpServlet {
 		try {
 			final Long id = Long.parseLong(req.getParameter("id"));
 			pedidoService.atender(id, req.getSession().getId());
+			notificacaoWebSocket.notificar();
 			resp.setStatus(200);
 			resp.getWriter().write(gson.toJson(new Resultado(true, "Atendimento registrado com sucesso")));
 		} catch (final RuntimeException e) {
