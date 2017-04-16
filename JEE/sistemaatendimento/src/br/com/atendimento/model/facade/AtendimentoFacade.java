@@ -37,5 +37,5 @@ public class AtendimentoFacade {
 	public void remover(@PathParam("protocolo") Integer protocolo) {
 		service.remover(protocolo);
 	}
-	
+
 }

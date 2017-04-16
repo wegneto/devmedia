@@ -1,5 +1,4 @@
 <html ng-app="crudAtendimento">
-
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <script src="lib/angular.min.js"></script>
@@ -14,8 +13,8 @@
 		style="width: 700px; margin-top: 60px; margin-left: auto; margin-right: auto;">
 
 		<table>
-			<tr>
-				<td>
+			<tr class="row">
+				<td class="col-xs-2">
 					<button class="btn btn-default" ng-click="novo()">Novo</button>
 				</td>
 				<td class="col-xs-3">
@@ -53,8 +52,7 @@
 				</tr>
 				<tr class="row">
 					<td class="col-xs-2">Nota Atendimento:</td>
-					<td class="col-xs-3"><select name="selectedFacilityId"
-						ng-model="atendimento.atendimentoEnum" />
+					<td class="col-xs-3"><select name="selectedFacilityId" ng-model="atendimento.atendimentoEnum" />
 						<option value="">Nota Atendimento</option>
 						<option value="EXCELENTE">Excelente</option>
 						<option value="OTIMO">Ótimo</option>
@@ -73,8 +71,7 @@
 				<th>Detalhamento</th>
 				<th>Nota Atendimento</th>
 			</tr>
-			<tr ng-repeat="atendimento in atendimentos | filter:criterio"
-				ng-click="seleciona(atendimento)">
+			<tr ng-repeat="atendimento in atendimentos | filter:criterio" ng-click="seleciona(atendimento)">
 				<td>{{atendimento.nomeCliente}}</td>
 				<td>{{atendimento.protocolo}}</td>
 				<td>{{atendimento.detalhamento}}</td>
@@ -85,5 +82,4 @@
 			não temos o item que você está procurando!</span>
 	</div>
 </body>
-
 </html>

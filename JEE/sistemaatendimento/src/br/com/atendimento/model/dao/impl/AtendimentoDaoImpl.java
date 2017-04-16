@@ -28,7 +28,6 @@ public class AtendimentoDaoImpl implements AtendimentoDao {
 	@Override
 	public void remover(Atendimento entity) {
 		entity = em.merge(entity);
-
 		em.remove(entity);
 	}
 
