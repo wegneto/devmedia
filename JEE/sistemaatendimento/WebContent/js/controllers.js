@@ -1,19 +1,11 @@
 var crudAtendimento = angular.module('crudAtendimento', ["ngResource"]);
 
-crudAtendimento.controller("AtendimentoController",
-    ["$resource", "$scope",
-        function ($resource, $scope) {
+crudAtendimento.controller("AtendimentoController", ["$resource", "$scope", function ($resource, $scope) {
 
             var angularResource = $resource("/SistemaAtendimento/ws/atendimento");
-            var angularResourceParam = $resource(
-                "/SistemaAtendimento/ws/atendimento/:protocolo",
-                {
-                    protocolo: "@protocolo"
-                });
+            var angularResourceParam = $resource("/SistemaAtendimento/ws/atendimento/:protocolo", {protocolo: "@protocolo"});
 
-            $scope.atendimentos = angularResource
-                .query(function () {
-                });
+            $scope.atendimentos = angularResource.query(function () {});
 
             $scope.salvar = function () {
                 var newResource = new angularResource(
